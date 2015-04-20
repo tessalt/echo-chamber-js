@@ -1,9 +1,16 @@
 var CommentList = {};
+var Comment = require('./comment.js');
 
 CommentList.init = function(form) {
-  this.comments = [];
   var list = document.createElement("div");
   this.list = form.parentNode.appendChild(list);
+  this.comments = this.load();
+  this.render();
+};
+
+CommentList.load = function() {
+  var srcComments = _fetch();
+  return _parse(srcComments);
 };
 
 CommentList.save = function() {
@@ -30,5 +37,19 @@ CommentList.buildHTML = function() {
     return total + comment.render(); 
   }, '');
 };
+
+var _fetch = function() {
+  var rawComments = localStorage.getItem("comments") || [];
+  return JSON.parse(rawComments);
+};
+
+var _parse = function(srcComments) {
+  return srcComments.map(function(comment) {
+    var c = Object.create(Comment);
+    c.init(comment.text, comment.author, comment.email);
+    return c;
+  });
+};
+
 
 module.exports = CommentList;
