@@ -3,6 +3,7 @@ var Comment = require('./comment.js');
 
 CommentList.init = function(form) {
   var list = document.createElement("div");
+  list.setAttribute("id", "EC-list");
   this.list = form.parentNode.appendChild(list);
   this.comments = this.load();
   this.render();

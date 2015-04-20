@@ -11,9 +11,11 @@ EchoChamber.init = function() {
 
 EchoChamber.attachIframe = function() {
   var iframe = document.createElement('iframe');
-  iframe.style.width = '250px';
-  iframe.style.height = '300px';
+  iframe.style.width = '100%';
   iframe.style.border = 'none';
+  iframe.scrolling = false;
+  iframe.setAttribute("horizontalscrolling", "no");
+  iframe.setAttribute("verticalscrolling", "no");
   this.entry.parentNode.insertBefore(iframe, this.entry);
   return iframe;
 }

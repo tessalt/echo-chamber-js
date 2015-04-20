@@ -9,6 +9,7 @@ Form.init = function(iframe) {
   this.commentsList = Object.create(CommentList);
   this.commentsList.init(this.DOM.form);
   this.addEventListeners();
+  this.resize();
 }
 
 Form.template = {
@@ -24,6 +25,9 @@ Form.template = {
       "</div>"
     );
   }
+};
+
+Form.resize = function() {
 };
 
 Form.addEventListeners = function() {
@@ -55,7 +59,6 @@ Form.showErrors = function(errors) {
   errors.forEach(function(error) {
     var msg = this.doc.createElement("p");
     msg.innerHTML = error.message;
-    console.log(msg);
     this.DOM.form.elements[error.field].parentNode.appendChild(msg)
   }.bind(this));
 };

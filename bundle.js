@@ -73,9 +73,11 @@
 
 	EchoChamber.attachIframe = function() {
 	  var iframe = document.createElement('iframe');
-	  iframe.style.width = '250px';
-	  iframe.style.height = '300px';
+	  iframe.style.width = '100%';
 	  iframe.style.border = 'none';
+	  iframe.scrolling = false;
+	  iframe.setAttribute("horizontalscrolling", "no");
+	  iframe.setAttribute("verticalscrolling", "no");
 	  this.entry.parentNode.insertBefore(iframe, this.entry);
 	  return iframe;
 	}
@@ -92,6 +94,7 @@
 
 	CommentList.init = function(form) {
 	  var list = document.createElement("div");
+	  list.setAttribute("id", "EC-list");
 	  this.list = form.parentNode.appendChild(list);
 	  this.comments = this.load();
 	  this.render();
@@ -159,6 +162,7 @@
 	  this.commentsList = Object.create(CommentList);
 	  this.commentsList.init(this.DOM.form);
 	  this.addEventListeners();
+	  this.resize();
 	}
 
 	Form.template = {
@@ -174,6 +178,9 @@
 	      "</div>"
 	    );
 	  }
+	};
+
+	Form.resize = function() {
 	};
 
 	Form.addEventListeners = function() {
@@ -205,7 +212,6 @@
 	  errors.forEach(function(error) {
 	    var msg = this.doc.createElement("p");
 	    msg.innerHTML = error.message;
-	    console.log(msg);
 	    this.DOM.form.elements[error.field].parentNode.appendChild(msg)
 	  }.bind(this));
 	};
