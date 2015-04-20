@@ -12,6 +12,7 @@ EchoChamber.init = function() {
 EchoChamber.attachIframe = function() {
   var iframe = document.createElement('iframe');
   iframe.style.width = '100%';
+  iframe.style.height = '900px';
   iframe.style.border = 'none';
   iframe.scrolling = false;
   iframe.setAttribute("horizontalscrolling", "no");

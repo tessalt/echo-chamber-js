@@ -74,6 +74,7 @@
 	EchoChamber.attachIframe = function() {
 	  var iframe = document.createElement('iframe');
 	  iframe.style.width = '100%';
+	  iframe.style.height = '900px';
 	  iframe.style.border = 'none';
 	  iframe.scrolling = false;
 	  iframe.setAttribute("horizontalscrolling", "no");
@@ -125,13 +126,14 @@
 	};
 
 	CommentList.buildHTML = function() {
-	  return this.comments.reduce(function(total, comment) {
+	  var comments = this.comments.slice();
+	  return comments.reverse().reduce(function(total, comment) {
 	    return total + comment.render(); 
 	  }, '');
 	};
 
 	var _fetch = function() {
-	  var rawComments = localStorage.getItem("comments") || [];
+	  var rawComments = localStorage.getItem("comments") || "[]";
 	  return JSON.parse(rawComments);
 	};
 
@@ -142,7 +144,6 @@
 	    return c;
 	  });
 	};
-
 
 	module.exports = CommentList;
 
@@ -158,6 +159,7 @@
 	Form.init = function(iframe) {
 	  this.iframe = iframe; 
 	  this.DOM = {};
+	  this.fields = {};
 	  this.initDOM(this.iframe);
 	  this.commentsList = Object.create(CommentList);
 	  this.commentsList.init(this.DOM.form);
@@ -197,12 +199,13 @@
 
 	Form.submit = function() {
 	  var comment = Object.create(Comment);
-	  var form = this.DOM.form.elements;
-	  comment.init(form["text"].value, form["author"].value, form["email"].value);
+	  this.fields = this.DOM.form.elements;
+	  comment.init(this.fields["text"].value, this.fields["author"].value, this.fields["email"].value);
 	  if (comment.validate()) {
 	    this.commentsList.comments.push(comment);
 	    this.commentsList.save();
 	    this.commentsList.render(this.DOM.form);
+	    this.clear();
 	  } else {
 	    this.showErrors(comment.errors);
 	  }
@@ -213,6 +216,12 @@
 	    var msg = this.doc.createElement("p");
 	    msg.innerHTML = error.message;
 	    this.DOM.form.elements[error.field].parentNode.appendChild(msg)
+	  }.bind(this));
+	};
+
+	Form.clear = function() {
+	  ["text", "author", "email"].forEach(function(field) {
+	    this.fields[field].value = '';
 	  }.bind(this));
 	};
 

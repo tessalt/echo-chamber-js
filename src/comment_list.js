@@ -34,13 +34,14 @@ CommentList.render = function(target) {
 };
 
 CommentList.buildHTML = function() {
-  return this.comments.reduce(function(total, comment) {
+  var comments = this.comments.slice();
+  return comments.reverse().reduce(function(total, comment) {
     return total + comment.render(); 
   }, '');
 };
 
 var _fetch = function() {
-  var rawComments = localStorage.getItem("comments") || [];
+  var rawComments = localStorage.getItem("comments") || "[]";
   return JSON.parse(rawComments);
 };
 
@@ -51,6 +52,5 @@ var _parse = function(srcComments) {
     return c;
   });
 };
-
 
 module.exports = CommentList;
