@@ -1,11 +1,18 @@
-  var Comment = {};
+var Comment = {};
 
-  Comment.init = function(text, author, email) {
-    this.text = text;
-    this.author = author;
-    this.email = email;
-  };
+Comment.init = function(text, author, email) {
+  this.text = text;
+  this.author = author;
+  this.email = email;
+};
 
-  var EchoChamber = window.EchoChamber || {};
+Comment.render = function() {
+  return (
+    "<div class='ec-comment'>" + 
+      "<h4>" + this.author + "</h4>" +
+      "<p>" + this.text + "</p>" +
+    "</div>"
+  );
+};
 
-  module.exports = Comment;
+module.exports = Comment;

@@ -89,8 +89,10 @@
 
 	var CommentList = {};
 
-	CommentList.init = function() {
+	CommentList.init = function(form) {
 	  this.comments = [];
+	  var list = document.createElement("div");
+	  this.list = form.parentNode.appendChild(list);
 	};
 
 	CommentList.save = function() {
@@ -108,6 +110,16 @@
 	  }));
 	};
 
+	CommentList.render = function(target) {
+	  this.list.innerHTML = this.buildHTML();
+	};
+
+	CommentList.buildHTML = function() {
+	  return this.comments.reduce(function(total, comment) {
+	    return total + comment.render(); 
+	  }, '');
+	};
+
 	module.exports = CommentList;
 
 
@@ -117,7 +129,6 @@
 
 	var CommentList = __webpack_require__(2);
 	var Comment = __webpack_require__(4);
-
 	var Form = {};
 
 	Form.init = function(iframe) {
@@ -125,21 +136,23 @@
 	  this.DOM = {};
 	  this.initDOM(this.iframe);
 	  this.commentsList = Object.create(CommentList);
-	  this.commentsList.init();
+	  this.commentsList.init(this.DOM.form);
 	  this.addEventListeners();
 	}
 
-	Form.template = function() {
-	  return (
-	    "<div class='ec-form-wrapper'>" + 
-	      "<form id='ECForm' class='ec-form'>" + 
-	        "<input type='text' name='author' placeholder='name'>" +
-	        "<input type='email' name='email' placeholder='email'>" +
-	        "<textarea name='text' id='ECFormField'></textarea>" + 
-	        "<input id='ECFormSubmit' type='submit' value='submit'>" + 
-	      "</form>" + 
-	    "</div>"
-	  );
+	Form.template = {
+	  form: function() {
+	    return (
+	      "<div class='ec-form-wrapper'>" + 
+	        "<form id='ECForm' class='ec-form'>" + 
+	          "<input type='text' name='author' placeholder='name'>" +
+	          "<input type='email' name='email' placeholder='email'>" +
+	          "<textarea name='text' id='ECFormField'></textarea>" + 
+	          "<input id='ECFormSubmit' type='submit' value='submit'>" + 
+	        "</form>" + 
+	      "</div>"
+	    );
+	  }
 	};
 
 	Form.addEventListeners = function() {
@@ -148,7 +161,7 @@
 
 	Form.initDOM = function(target) {
 	  this.doc = target.contentWindow.document;
-	  this.doc.write(this.template());
+	  this.doc.write(this.template.form());
 	  this.doc.close();
 	  this.DOM.form = this.doc.getElementById('ECForm');
 	  this.DOM.button = this.doc.getElementById('ECFormSubmit');
@@ -159,7 +172,8 @@
 	  comment.init(form.elements["text"].value, form.elements["author"].value, form.elements["email"].value);
 	  this.commentsList.comments.push(comment);
 	  this.commentsList.save();
-	}
+	  this.commentsList.render(this.DOM.form);
+	};
 
 	var _onClick = function(e) {
 	  e.preventDefault();
@@ -173,17 +187,24 @@
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	  var Comment = {};
+	var Comment = {};
 
-	  Comment.init = function(text, author, email) {
-	    this.text = text;
-	    this.author = author;
-	    this.email = email;
-	  };
+	Comment.init = function(text, author, email) {
+	  this.text = text;
+	  this.author = author;
+	  this.email = email;
+	};
 
-	  var EchoChamber = window.EchoChamber || {};
+	Comment.render = function() {
+	  return (
+	    "<div class='ec-comment'>" + 
+	      "<h4>" + this.author + "</h4>" +
+	      "<p>" + this.text + "</p>" +
+	    "</div>"
+	  );
+	};
 
-	  module.exports = Comment;
+	module.exports = Comment;
 
 
 /***/ }

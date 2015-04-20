@@ -1,7 +1,9 @@
 var CommentList = {};
 
-CommentList.init = function() {
+CommentList.init = function(form) {
   this.comments = [];
+  var list = document.createElement("div");
+  this.list = form.parentNode.appendChild(list);
 };
 
 CommentList.save = function() {
@@ -17,6 +19,16 @@ CommentList.stringify = function() {
       children: item.children
     }
   }));
+};
+
+CommentList.render = function(target) {
+  this.list.innerHTML = this.buildHTML();
+};
+
+CommentList.buildHTML = function() {
+  return this.comments.reduce(function(total, comment) {
+    return total + comment.render(); 
+  }, '');
 };
 
 module.exports = CommentList;
