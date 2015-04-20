@@ -24,13 +24,15 @@ CommentList.stringify = function() {
       text: item.text,
       author: item.author,
       email: item.email,
-      children: item.children
+      date: item.timestamp
     }
   }));
 };
 
 CommentList.render = function(target) {
-  this.list.innerHTML = this.buildHTML();
+  var count = this.comments.length;
+  this.listHeader = "<h3>" + count + " " + _commentString(count)  + "</h3>";
+  this.list.innerHTML = this.listHeader + this.buildHTML();
 };
 
 CommentList.buildHTML = function() {
@@ -51,6 +53,10 @@ var _parse = function(srcComments) {
     c.init(comment.text, comment.author, comment.email);
     return c;
   });
+};
+
+var _commentString = function(count) {
+  return count > 1 ? 'comments' : 'comment';
 };
 
 module.exports = CommentList;

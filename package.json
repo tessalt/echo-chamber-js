@@ -1,0 +1,22 @@
+{
+  "name": "echo-chamber-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tessalt/echo-chamber-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tessalt/echo-chamber-js/issues"
+  },
+  "homepage": "https://github.com/tessalt/echo-chamber-js",
+  "dependencies": {
+    "js-md5": "^0.3.0"
+  }
+}
