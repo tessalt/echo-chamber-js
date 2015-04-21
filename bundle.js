@@ -77,6 +77,7 @@
 	  var iframe = document.createElement('iframe');
 	  iframe.style.width = '100%';
 	  iframe.style.overflow = 'hidden';
+	  iframe.style.border = "none";
 	  iframe.scrolling = false;
 	  iframe.setAttribute("horizontalscrolling", "no");
 	  iframe.setAttribute("verticalscrolling", "no");
@@ -199,12 +200,17 @@
 	Form.template = {
 	  form: function() {
 	    return (
-	      "<div class='ec-form-wrapper'>" + 
-	        "<form id='ECForm' class='ec-form'>" + 
-	          "<div class='ec-form-field' id='ECForm-author'><input class='field-light' type='text' name='author' placeholder='name'></div>" +
-	          "<div class='ec-form-field' id='ECForm-email'><input class='field-light' type='email' name='email' placeholder='email'></div>" +
-	          "<div class='ec-form-field' id='ECForm-text'><textarea class='field-light' name='text' id='ECFormField'></textarea></div>" + 
-	          "<input id='ECFormSubmit' type='submit' value='submit'>" + 
+	      "<div id='ECForm' class='ec-form-wrapper'>" + 
+	        "<h2 class='h3 mt0'>Leave a comment</h2>" + 
+	        "<form class='p1 ec-form bg-darken-1'>" + 
+	          "<div class='ec-form-field mt1 mb2 px1' id='ECForm-text'><textarea class='field-light full-width' name='text' id='ECFormField'></textarea></div>" + 
+	          "<div class='clearfix mb1'>" + 
+	            "<div class='ec-form-field px1 col col-4' id='ECForm-author'><input class='field-light full-width' type='text' name='author' placeholder='name'></div>" +
+	            "<div class='ec-form-field px1 col col-4' id='ECForm-email'><input class='field-light full-width' type='email' name='email' placeholder='email'></div>" +
+	            "<div class='px1 col col-4'>" + 
+	              "<input class='button full-width' id='ECFormSubmit' type='submit' value='Submit comment'>" + 
+	            "</div>" +
+	          "</div>" +
 	        "</form>" + 
 	      "</div>"
 	    );
@@ -242,6 +248,7 @@
 	  } else {
 	    this.showErrors(comment.errors);
 	  }
+	  this.resize();
 	};
 
 	Form.showErrors = function(errors) {
@@ -303,17 +310,22 @@
 
 	Comment.render = function() {
 	  return (
-	    "<div class='ec-comment'>" + 
-	     "<img src='" + _authorGravatar(this.email) + "'>" +
-	      "<h4>" + this.author + "</h4>" +
-	      "<p>" + this.text + "</p>" +
-	      "<p class='mb0'><small>" + _renderDate(this.timestamp) + "</small></p>" +
+	    "<div class='ec-comment clearfix mt2'>" + 
+	      "<div class='left mr2'>" +
+	        "<img class='rounded' src='" + _authorGravatar(this.email) + "'>" +
+	      "</div>" +
+	      "<div class='overflow-hidden'>" +
+	        "<h3 class='h5 mt0 regular'><span class='bold'>" + this.author  + "</span>" +
+	          "<small class='gray'> |  " + _renderDate(this.timestamp) + "</small>" +
+	        "</h3>" +
+	        "<p>" + this.text + "</p>" +
+	      "</div>" +
 	    "</div>"
 	  );
 	};
 
 	var _authorGravatar = function(email) {
-	  return "http://www.gravatar.com/avatar/" + _emailHash(email);
+	  return "http://www.gravatar.com/avatar/" + _emailHash(email) + "?s=48";
 	};
 
 	var _emailHash = function(email) {
@@ -751,8 +763,8 @@
 	 */
 
 	var base64 = __webpack_require__(21)
-	var ieee754 = __webpack_require__(18)
-	var isArray = __webpack_require__(19)
+	var ieee754 = __webpack_require__(19)
+	var isArray = __webpack_require__(18)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -2225,6 +2237,45 @@
 /* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
+	
+	/**
+	 * isArray
+	 */
+
+	var isArray = Array.isArray;
+
+	/**
+	 * toString
+	 */
+
+	var str = Object.prototype.toString;
+
+	/**
+	 * Whether or not the given `val`
+	 * is an array.
+	 *
+	 * example:
+	 *
+	 *        isArray([]);
+	 *        // > true
+	 *        isArray(arguments);
+	 *        // > false
+	 *        isArray('');
+	 *        // > false
+	 *
+	 * @param {mixed} val
+	 * @return {bool}
+	 */
+
+	module.exports = isArray || function (val) {
+	  return !! val && '[object Array]' == str.call(val);
+	};
+
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
 	exports.read = function(buffer, offset, isLE, mLen, nBytes) {
 	  var e, m,
 	      eLen = nBytes * 8 - mLen - 1,
@@ -2308,45 +2359,6 @@
 	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8);
 
 	  buffer[offset + i - d] |= s * 128;
-	};
-
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * isArray
-	 */
-
-	var isArray = Array.isArray;
-
-	/**
-	 * toString
-	 */
-
-	var str = Object.prototype.toString;
-
-	/**
-	 * Whether or not the given `val`
-	 * is an array.
-	 *
-	 * example:
-	 *
-	 *        isArray([]);
-	 *        // > true
-	 *        isArray(arguments);
-	 *        // > false
-	 *        isArray('');
-	 *        // > false
-	 *
-	 * @param {mixed} val
-	 * @return {bool}
-	 */
-
-	module.exports = isArray || function (val) {
-	  return !! val && '[object Array]' == str.call(val);
 	};
 
 

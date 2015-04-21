@@ -16,12 +16,17 @@ Form.init = function(iframe) {
 Form.template = {
   form: function() {
     return (
-      "<div class='ec-form-wrapper'>" + 
-        "<form id='ECForm' class='ec-form'>" + 
-          "<div class='ec-form-field' id='ECForm-author'><input class='field-light' type='text' name='author' placeholder='name'></div>" +
-          "<div class='ec-form-field' id='ECForm-email'><input class='field-light' type='email' name='email' placeholder='email'></div>" +
-          "<div class='ec-form-field' id='ECForm-text'><textarea class='field-light' name='text' id='ECFormField'></textarea></div>" + 
-          "<input id='ECFormSubmit' type='submit' value='submit'>" + 
+      "<div id='ECForm' class='ec-form-wrapper'>" + 
+        "<h2 class='h3 mt0'>Leave a comment</h2>" + 
+        "<form class='p1 ec-form bg-darken-1'>" + 
+          "<div class='ec-form-field mt1 mb2 px1' id='ECForm-text'><textarea class='field-light full-width' name='text' id='ECFormField'></textarea></div>" + 
+          "<div class='clearfix mb1'>" + 
+            "<div class='ec-form-field px1 col col-4' id='ECForm-author'><input class='field-light full-width' type='text' name='author' placeholder='name'></div>" +
+            "<div class='ec-form-field px1 col col-4' id='ECForm-email'><input class='field-light full-width' type='email' name='email' placeholder='email'></div>" +
+            "<div class='px1 col col-4'>" + 
+              "<input class='button full-width' id='ECFormSubmit' type='submit' value='Submit comment'>" + 
+            "</div>" +
+          "</div>" +
         "</form>" + 
       "</div>"
     );
@@ -59,6 +64,7 @@ Form.submit = function() {
   } else {
     this.showErrors(comment.errors);
   }
+  this.resize();
 };
 
 Form.showErrors = function(errors) {

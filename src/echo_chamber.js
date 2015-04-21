@@ -15,6 +15,7 @@ EchoChamber.attachIframe = function() {
   var iframe = document.createElement('iframe');
   iframe.style.width = '100%';
   iframe.style.overflow = 'hidden';
+  iframe.style.border = "none";
   iframe.scrolling = false;
   iframe.setAttribute("horizontalscrolling", "no");
   iframe.setAttribute("verticalscrolling", "no");
