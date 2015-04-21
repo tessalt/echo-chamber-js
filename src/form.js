@@ -46,7 +46,7 @@ Form.initDOM = function(target) {
 Form.submit = function() {
   var comment = Object.create(Comment);
   this.fields = this.DOM.form.elements;
-  comment.init(this.fields["text"].value, this.fields["author"].value, this.fields["email"].value);
+  comment.init(this.fields["text"].value, this.fields["author"].value, this.fields["email"].value.trim(), new Date().toString());
   if (comment.validate()) {
     this.commentsList.comments.push(comment);
     this.commentsList.save();

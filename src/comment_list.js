@@ -24,7 +24,7 @@ CommentList.stringify = function() {
       text: item.text,
       author: item.author,
       email: item.email,
-      date: item.timestamp
+      timestamp: item.timestamp
     }
   }));
 };
@@ -50,7 +50,7 @@ var _fetch = function() {
 var _parse = function(srcComments) {
   return srcComments.map(function(comment) {
     var c = Object.create(Comment);
-    c.init(comment.text, comment.author, comment.email);
+    c.init(comment.text, comment.author, comment.email, comment.timestamp);
     return c;
   });
 };

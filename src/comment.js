@@ -2,11 +2,11 @@ md5 = require('../node_modules/js-md5');
 
 var Comment = {};
 
-Comment.init = function(text, author, email) {
+Comment.init = function(text, author, email, timestamp) {
   this.text = text;
   this.author = author;
   this.email = email;
-  this.timestamp = new Date().toDateString();
+  this.timestamp = timestamp;
   this.errors = [];
 };
 
@@ -28,19 +28,22 @@ Comment.render = function() {
      "<img src='" + _authorGravatar(this.email) + "'>" +
       "<h4>" + this.author + "</h4>" +
       "<p>" + this.text + "</p>" +
-      "<p><small>" + this.timestamp + "</small></p>" +
+      "<p><small>" + _renderDate(this.timestamp) + "</small></p>" +
     "</div>"
   );
 };
 
 var _authorGravatar = function(email) {
-  var hash = _emailHash(email);
-  var src = "http://www.gravatar.com/avatar/" + hash;
-  return src;
+  return "http://www.gravatar.com/avatar/" + _emailHash(email);
 };
 
 var _emailHash = function(email) {
   return md5(email);
+};
+
+var _renderDate = function(timestamp) {
+  var date = new Date(timestamp);
+  return date.toDateString() + " at " + date.getHours() + ":" + date.getMinutes(); 
 };
 
 module.exports = Comment;

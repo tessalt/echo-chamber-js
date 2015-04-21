@@ -116,7 +116,7 @@
 	      text: item.text,
 	      author: item.author,
 	      email: item.email,
-	      date: item.timestamp
+	      timestamp: item.timestamp
 	    }
 	  }));
 	};
@@ -142,7 +142,7 @@
 	var _parse = function(srcComments) {
 	  return srcComments.map(function(comment) {
 	    var c = Object.create(Comment);
-	    c.init(comment.text, comment.author, comment.email);
+	    c.init(comment.text, comment.author, comment.email, comment.timestamp);
 	    return c;
 	  });
 	};
@@ -206,7 +206,7 @@
 	Form.submit = function() {
 	  var comment = Object.create(Comment);
 	  this.fields = this.DOM.form.elements;
-	  comment.init(this.fields["text"].value, this.fields["author"].value, this.fields["email"].value);
+	  comment.init(this.fields["text"].value, this.fields["author"].value, this.fields["email"].value.trim(), new Date().toString());
 	  if (comment.validate()) {
 	    this.commentsList.comments.push(comment);
 	    this.commentsList.save();
@@ -247,11 +247,11 @@
 
 	var Comment = {};
 
-	Comment.init = function(text, author, email) {
+	Comment.init = function(text, author, email, timestamp) {
 	  this.text = text;
 	  this.author = author;
 	  this.email = email;
-	  this.timestamp = new Date().toDateString();
+	  this.timestamp = timestamp;
 	  this.errors = [];
 	};
 
@@ -273,19 +273,22 @@
 	     "<img src='" + _authorGravatar(this.email) + "'>" +
 	      "<h4>" + this.author + "</h4>" +
 	      "<p>" + this.text + "</p>" +
-	      "<p><small>" + this.timestamp + "</small></p>" +
+	      "<p><small>" + _renderDate(this.timestamp) + "</small></p>" +
 	    "</div>"
 	  );
 	};
 
 	var _authorGravatar = function(email) {
-	  var hash = _emailHash(email);
-	  var src = "http://www.gravatar.com/avatar/" + hash;
-	  return src;
+	  return "http://www.gravatar.com/avatar/" + _emailHash(email);
 	};
 
 	var _emailHash = function(email) {
 	  return md5(email);
+	};
+
+	var _renderDate = function(timestamp) {
+	  var date = new Date(timestamp);
+	  return date.toDateString() + " at " + date.getHours() + ":" + date.getMinutes(); 
 	};
 
 	module.exports = Comment;
