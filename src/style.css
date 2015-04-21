@@ -1,0 +1,6 @@
+@import "../node_modules/basscss/css/basscss.css";
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0;
+}

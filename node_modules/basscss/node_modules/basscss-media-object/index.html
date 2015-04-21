@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf8">
+  <title>Basscss-media</title>
+  <meta name="author" content="Brent Jackson">
+  <meta name="description" content="Media object module for Basscss">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="keywords" content="CSS,OOCSS,Basscss">
+  
+  
+    <link rel="stylesheet" href="http://d2v52k3cl9vedd.cloudfront.net/bassdock/1.2.1/bassdock.min.css">
+  
+    <link rel="stylesheet" href="css/index.css">
+  
+</head>
+<body>
+
+  <div class="container px2 overflow-hidden">
+
+    <header class="mb3 py1 border-bottom">
+      <div class="flex flex-center flex-wrap mxn2">
+        <div class="flex-auto px2 py1">
+          <h1 id="basscss-media">Basscss Media</h1>
+
+          <p>Flexbox media object module for Basscss - <a href="http://basscss.com">http://basscss.com</a></p>
+
+        </div>
+        <div class="px2">
+          
+            <a href="https://github.com/jxnblk/basscss-media" class="button button-small ml1 mr1 button-link blue">Github</a>
+          
+          
+            <a href="http://npmjs.com/package/basscss-media" class="button button-small ml1 mr1 button-link blue">NPM</a>
+          
+        </div>
+    </header>
+
+    <div class="clearfix mb3 mxn3">
+      <div class="sm-col sm-col-9 px3 py2">
+        <h2 id="basic-usage"><a href="#basic-usage">Basic Usage</a></h2><div class="MarkedExample mb2 bg-darken-1 rounded">
+  <div class="MarkedExample-rendered p2">
+    <div class="media">
+  <img src="http://placehold.it/96" class="media-img" />
+  <div class="media-body">
+    Media Object
+  </div>
+</div>
+  </div>
+  <pre class="MarkedExample-code m0 p2 bg-darken-1 rounded-bottom"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://placehold.it/96"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-img"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-body"</span>&gt;</span>
+    Media Object
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></pre>
+</div>
+<h2 id="centered"><a href="#centered">Centered</a></h2><div class="MarkedExample mb2 bg-darken-1 rounded">
+  <div class="MarkedExample-rendered p2">
+    <div class="media media-center">
+  <img src="http://placehold.it/96" class="media-img" />
+  <div class="media-body">
+    Media Object
+  </div>
+</div>
+  </div>
+  <pre class="MarkedExample-code m0 p2 bg-darken-1 rounded-bottom"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media media-center"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://placehold.it/96"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-img"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-body"</span>&gt;</span>
+    Media Object
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></pre>
+</div>
+<h2 id="bottom-aligned"><a href="#bottom-aligned">Bottom Aligned</a></h2><div class="MarkedExample mb2 bg-darken-1 rounded">
+  <div class="MarkedExample-rendered p2">
+    <div class="media media-bottom">
+  <img src="http://placehold.it/96" class="media-img" />
+  <div class="media-body">
+    Media Object
+  </div>
+</div>
+  </div>
+  <pre class="MarkedExample-code m0 p2 bg-darken-1 rounded-bottom"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media media-bottom"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://placehold.it/96"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-img"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-body"</span>&gt;</span>
+    Media Object
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></pre>
+</div>
+<h2 id="source-order"><a href="#source-order">Source Order</a></h2><div class="MarkedExample mb2 bg-darken-1 rounded">
+  <div class="MarkedExample-rendered p2">
+    <div class="media">
+  <div class="media-body">
+    Media Object
+  </div>
+  <img src="http://placehold.it/96" class="media-img" />
+</div>
+  </div>
+  <pre class="MarkedExample-code m0 p2 bg-darken-1 rounded-bottom"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-body"</span>&gt;</span>
+    Media Object
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://placehold.it/96"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-img"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></pre>
+</div>
+<h2 id="double-sided"><a href="#double-sided">Double-Sided</a></h2><div class="MarkedExample mb2 bg-darken-1 rounded">
+  <div class="MarkedExample-rendered p2">
+    <div class="media media-center">
+  <img src="http://placehold.it/96" class="media-img" />
+  <div class="media-body">
+    Media Object
+  </div>
+  <img src="http://placehold.it/96" class="media-img" />
+</div>
+  </div>
+  <pre class="MarkedExample-code m0 p2 bg-darken-1 rounded-bottom"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media media-center"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://placehold.it/96"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-img"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-body"</span>&gt;</span>
+    Media Object
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://placehold.it/96"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-img"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></pre>
+</div>
+<h2 id="multiple-images"><a href="#multiple-images">Multiple Images</a></h2><div class="MarkedExample mb2 bg-darken-1 rounded">
+  <div class="MarkedExample-rendered p2">
+    <div class="media media-center">
+  <img src="http://placehold.it/96" class="media-img" />
+  <img src="http://placehold.it/96" class="media-img" />
+  <div class="media-body">
+    Media Object
+  </div>
+</div>
+  </div>
+  <pre class="MarkedExample-code m0 p2 bg-darken-1 rounded-bottom"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media media-center"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://placehold.it/96"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-img"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://placehold.it/96"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-img"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-body"</span>&gt;</span>
+    Media Object
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></pre>
+</div>
+<h2 id="responsive-media-objects"><a href="#responsive-media-objects">Responsive Media Objects</a></h2><div class="MarkedExample mb2 bg-darken-1 rounded">
+  <div class="MarkedExample-rendered p2">
+    <div class="sm-media media-center">
+  <img src="http://placehold.it/96" class="media-img" />
+  <div class="media-body">
+    Media Object
+  </div>
+</div>
+  </div>
+  <pre class="MarkedExample-code m0 p2 bg-darken-1 rounded-bottom"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"sm-media media-center"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://placehold.it/96"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-img"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-body"</span>&gt;</span>
+    Media Object
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></pre>
+</div>
+<div class="MarkedExample mb2 bg-darken-1 rounded">
+  <div class="MarkedExample-rendered p2">
+    <div class="md-media media-center">
+  <img src="http://placehold.it/96" class="media-img" />
+  <div class="media-body">
+    Media Object
+  </div>
+</div>
+  </div>
+  <pre class="MarkedExample-code m0 p2 bg-darken-1 rounded-bottom"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"md-media media-center"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://placehold.it/96"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-img"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-body"</span>&gt;</span>
+    Media Object
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></pre>
+</div>
+<div class="MarkedExample mb2 bg-darken-1 rounded">
+  <div class="MarkedExample-rendered p2">
+    <div class="lg-media media-center">
+  <img src="http://placehold.it/96" class="media-img" />
+  <div class="media-body">
+    Media Object
+  </div>
+</div>
+  </div>
+  <pre class="MarkedExample-code m0 p2 bg-darken-1 rounded-bottom"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"lg-media media-center"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"http://placehold.it/96"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-img"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"media-body"</span>&gt;</span>
+    Media Object
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></pre>
+</div>
+
+      </div>
+      <div class="sm-col sm-col-3 px3 py3">
+        <ul class="list-reset">
+          
+            <li>
+              <a href="#basscss-media" class="button button-small button-link blue">
+                Basscss Media
+              </a>
+            </li>
+          
+            <li>
+              <a href="#basic-usage" class="button button-small button-link blue">
+                Basic Usage
+              </a>
+            </li>
+          
+            <li>
+              <a href="#centered" class="button button-small button-link blue">
+                Centered
+              </a>
+            </li>
+          
+            <li>
+              <a href="#bottom-aligned" class="button button-small button-link blue">
+                Bottom Aligned
+              </a>
+            </li>
+          
+            <li>
+              <a href="#source-order" class="button button-small button-link blue">
+                Source Order
+              </a>
+            </li>
+          
+            <li>
+              <a href="#double-sided" class="button button-small button-link blue">
+                Double-Sided
+              </a>
+            </li>
+          
+            <li>
+              <a href="#multiple-images" class="button button-small button-link blue">
+                Multiple Images
+              </a>
+            </li>
+          
+            <li>
+              <a href="#responsive-media-objects" class="button button-small button-link blue">
+                Responsive Media Objects
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <footer class="py2 border-top">
+      <div class="flex flex-baseline mxn1">
+        <a href="/" class="button button-small button-link ml1 mr1">
+          basscss-media
+        </a>
+        <div class="h5 bold px1">v1.0.1</div>
+        <div class="flex-auto"></div>
+        <a href="https://github.com/jxnblk/basscss-media" class="button button-small button-link ml1 mr1">Github</a>
+        
+          <a href="http://npmjs.com/package/basscss-media" class="button button-small button-link ml1 mr1">NPM</a>
+        
+      </div>
+    </footer>
+
+  </div>
+
+  
+</body>
+</html>

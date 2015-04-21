@@ -28,7 +28,7 @@ Comment.render = function() {
      "<img src='" + _authorGravatar(this.email) + "'>" +
       "<h4>" + this.author + "</h4>" +
       "<p>" + this.text + "</p>" +
-      "<p><small>" + _renderDate(this.timestamp) + "</small></p>" +
+      "<p class='mb0'><small>" + _renderDate(this.timestamp) + "</small></p>" +
     "</div>"
   );
 };

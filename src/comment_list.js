@@ -31,7 +31,7 @@ CommentList.stringify = function() {
 
 CommentList.render = function(target) {
   var count = this.comments.length;
-  this.listHeader = "<h3>" + count + " " + _commentString(count)  + "</h3>";
+  this.listHeader = "<h3 class='mt0'>" + count + " " + _commentString(count)  + "</h3>";
   this.list.innerHTML = this.listHeader + this.buildHTML();
 };
 

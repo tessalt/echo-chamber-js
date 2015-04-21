@@ -1,3 +1,4 @@
+require('./style.css');
 var CommentList = require('./comment_list.js');
 var Form = require('./form.js');
 var EchoChamber = window.EchoChamber || {};
@@ -13,7 +14,6 @@ EchoChamber.init = function() {
 EchoChamber.attachIframe = function() {
   var iframe = document.createElement('iframe');
   iframe.style.width = '100%';
-  iframe.style.border = 'none';
   iframe.style.overflow = 'hidden';
   iframe.scrolling = false;
   iframe.setAttribute("horizontalscrolling", "no");
@@ -24,11 +24,20 @@ EchoChamber.attachIframe = function() {
 
 EchoChamber.loadStylesheet = function() {
   var link = document.createElement('link');
+  var img = document.createElement( "img" );
+  var body = document.body;
+  var head = this.iframe.contentWindow.document.children[0].children[0];
+  var cssURL = 'http://widget.dev/main.css';
   link.rel = 'stylesheet';
   link.type = 'text/css';
-  link.href = 'http://widget.dev/style.css';
-  var head = this.iframe.contentWindow.document.children[0].children[0];
+  link.href = cssURL; 
   head.appendChild(link);
+  body.appendChild(img);
+  img.src = cssURL;
+  img.onerror = function() {
+    this.form.resize();
+    body.removeChild(img);
+  }.bind(this);
 };
 
 module.exports = EchoChamber;

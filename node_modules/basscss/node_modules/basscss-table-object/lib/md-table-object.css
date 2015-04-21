@@ -1,0 +1,14 @@
+
+@media (--breakpoint-md) {
+
+  .md-table {
+    display: table;
+    width: 100%;
+  }
+  .md-table-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+}
+

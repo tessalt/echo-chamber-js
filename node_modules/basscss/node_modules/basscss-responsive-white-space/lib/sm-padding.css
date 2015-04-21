@@ -1,0 +1,21 @@
+
+@media (--breakpoint-sm) {
+
+  .sm-p1  { padding:       var(--space-1) }
+  .sm-py1 { padding-top:   var(--space-1); padding-bottom: var(--space-1) }
+  .sm-px1 { padding-left:  var(--space-1); padding-right:  var(--space-1) }
+
+  .sm-p2  { padding:       var(--space-2) }
+  .sm-py2 { padding-top:   var(--space-2); padding-bottom: var(--space-2) }
+  .sm-px2 { padding-left:  var(--space-2); padding-right:  var(--space-2) }
+
+  .sm-p3  { padding:       var(--space-3) }
+  .sm-py3 { padding-top:   var(--space-3); padding-bottom: var(--space-3) }
+  .sm-px3 { padding-left:  var(--space-3); padding-right:  var(--space-3) }
+
+  .sm-p4  { padding:       var(--space-4) }
+  .sm-py4 { padding-top:   var(--space-4); padding-bottom: var(--space-4) }
+  .sm-px4 { padding-left:  var(--space-4); padding-right:  var(--space-4) }
+
+}
+

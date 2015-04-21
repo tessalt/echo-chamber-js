@@ -18,9 +18,9 @@ Form.template = {
     return (
       "<div class='ec-form-wrapper'>" + 
         "<form id='ECForm' class='ec-form'>" + 
-          "<div class='ec-form-field' id='ECForm-author'><input type='text' name='author' placeholder='name'></div>" +
-          "<div class='ec-form-field' id='ECForm-email'><input type='email' name='email' placeholder='email'></div>" +
-          "<div class='ec-form-field' id='ECForm-text'><textarea name='text' id='ECFormField'></textarea></div>" + 
+          "<div class='ec-form-field' id='ECForm-author'><input class='field-light' type='text' name='author' placeholder='name'></div>" +
+          "<div class='ec-form-field' id='ECForm-email'><input class='field-light' type='email' name='email' placeholder='email'></div>" +
+          "<div class='ec-form-field' id='ECForm-text'><textarea class='field-light' name='text' id='ECFormField'></textarea></div>" + 
           "<input id='ECFormSubmit' type='submit' value='submit'>" + 
         "</form>" + 
       "</div>"

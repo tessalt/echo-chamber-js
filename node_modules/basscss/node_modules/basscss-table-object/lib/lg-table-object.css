@@ -1,0 +1,14 @@
+
+@media (--breakpoint-lg) {
+
+  .lg-table {
+    display: table;
+    width: 100%;
+  }
+  .lg-table-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+}
+
