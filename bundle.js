@@ -238,7 +238,7 @@
 
 	Form.submit = function() {
 	  var comment = Object.create(Comment);
-	  this.fields = this.DOM.form.elements;
+	  this.fields = this.DOM.form.getElementsByTagName("form")[0].elements;
 	  comment.init(this.fields["text"].value, this.fields["author"].value, this.fields["email"].value.trim(), new Date().toString());
 	  if (comment.validate()) {
 	    this.commentsList.comments.push(comment);
@@ -255,7 +255,11 @@
 	  errors.forEach(function(error) {
 	    var msg = this.doc.createElement("p");
 	    msg.innerHTML = error.message;
-	    this.DOM.form.elements[error.field].parentNode.appendChild(msg)
+	    msg.classList.add("red");
+	    msg.classList.add("mt1");
+	    msg.classList.add("h5");
+	    msg.classList.add("mb1");
+	    this.fields[error.field].parentNode.appendChild(msg)
 	  }.bind(this));
 	};
 
