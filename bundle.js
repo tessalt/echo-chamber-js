@@ -117,17 +117,18 @@
 	  var list = document.createElement("div");
 	  list.setAttribute("id", "EC-list");
 	  this.list = form.parentNode.appendChild(list);
+	  this.path = window.location.href; 
 	  this.comments = this.load();
 	  this.render();
 	};
 
 	CommentList.load = function() {
-	  var srcComments = _fetch();
+	  var srcComments = this.fetch();
 	  return _parse(srcComments);
 	};
 
 	CommentList.save = function() {
-	  localStorage.setItem("comments", this.stringify());
+	  localStorage.setItem(this.path, this.stringify());
 	};
 
 	CommentList.stringify = function() {
@@ -143,7 +144,7 @@
 
 	CommentList.render = function(target) {
 	  var count = this.comments.length;
-	  this.listHeader = "<h3 class='mt0'>" + count + " " + _commentString(count)  + "</h3>";
+	  this.listHeader = "<h3 class='mt0 mb0'>" + count + " " + _commentString(count)  + "</h3>";
 	  this.list.innerHTML = this.listHeader + this.buildHTML();
 	};
 
@@ -158,8 +159,8 @@
 	  }, '');
 	};
 
-	var _fetch = function() {
-	  var rawComments = localStorage.getItem("comments") || "[]";
+	CommentList.fetch = function() {
+	  var rawComments = localStorage.getItem(this.path) || "[]";
 	  return JSON.parse(rawComments);
 	};
 
