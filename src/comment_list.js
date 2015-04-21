@@ -35,6 +35,10 @@ CommentList.render = function(target) {
   this.list.innerHTML = this.listHeader + this.buildHTML();
 };
 
+CommentList.height = function() {
+  return this.list.clientHeight; 
+};
+
 CommentList.buildHTML = function() {
   var comments = this.comments.slice();
   return comments.reverse().reduce(function(total, comment) {

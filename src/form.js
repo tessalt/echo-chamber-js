@@ -29,6 +29,10 @@ Form.template = {
 };
 
 Form.resize = function() {
+  var formHeight = this.DOM.form.clientHeight;
+  var margin = parseInt(window.getComputedStyle(this.DOM.form).marginBottom);
+  var num = formHeight + margin + this.commentsList.height() + 20;
+  this.iframe.style.height = num + "px"; 
 };
 
 Form.addEventListeners = function() {
