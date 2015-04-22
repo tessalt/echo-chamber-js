@@ -1,55 +1,62 @@
-var CommentList = {};
 var Comment = require('./comment.js');
 
-CommentList.init = function(form) {
-  var list = document.createElement("div");
-  list.setAttribute("id", "EC-list");
-  this.list = form.parentNode.appendChild(list);
-  this.path = window.location.href; 
-  this.comments = this.load();
-  this.render();
-};
+var CommentList = {
+  
+  init: function (form) {
+    var list = document.createElement("div");
+    list.setAttribute("id", "EC-list");
+    this.list = form.parentNode.appendChild(list);
+    this.path = window.location.href; 
+    this.comments = this.load();
+    this.render();
+  },
 
-CommentList.load = function() {
-  var srcComments = this.fetch();
-  return _parse(srcComments);
-};
+  load: function () {
+    var rawComments = localStorage.getItem(this.path) || "[]";
+    return _parse(JSON.parse(rawComments));
+  },
 
-CommentList.save = function() {
-  localStorage.setItem(this.path, this.stringify());
-};
+  fetch: function () {
+    var rawComments = localStorage.getItem(this.path) || "[]";
+    return JSON.parse(rawComments);
+  },
 
-CommentList.stringify = function() {
-  return JSON.stringify(this.comments.map(function(item) {
-    return {
-      text: item.text,
-      author: item.author,
-      email: item.email,
-      timestamp: item.timestamp
-    }
-  }));
-};
+  save: function () {
+    localStorage.setItem(this.path, this.stringify());
+  },
 
-CommentList.render = function(target) {
-  var count = this.comments.length;
-  this.listHeader = "<h3 class='mt0 mb0'>" + count + " " + _commentString(count)  + "</h3>";
-  this.list.innerHTML = this.listHeader + this.buildHTML();
-};
+  render: function (target) {
+    var count = this.comments.length;
+    this.listHeader = "<h3 class='mt0 mb0'>" + count + " " + _commentString(count)  + "</h3>";
+    this.list.innerHTML = this.listHeader + this.buildHTML();
+  }, 
 
-CommentList.height = function() {
-  return this.list.clientHeight; 
-};
+  stringify: function () {
+    return JSON.stringify(this.comments.map(function(item) {
+      return {
+        text: item.text,
+        author: item.author,
+        email: item.email,
+        timestamp: item.timestamp
+      }
+    }));
+  },
+  
+  getHeight: function () {
+    return this.list.clientHeight;
+  },
 
-CommentList.buildHTML = function() {
-  var comments = this.comments.slice();
-  return comments.reverse().reduce(function(total, comment) {
-    return total + comment.render(); 
-  }, '');
-};
+  buildHTML: function () {
+    var comments = this.comments.slice();
+    return comments.reverse().reduce(function(total, comment) {
+      return total + comment.render(); 
+    }, '');
+  }
 
-CommentList.fetch = function() {
-  var rawComments = localStorage.getItem(this.path) || "[]";
-  return JSON.parse(rawComments);
+}
+
+var _commentString = function(count) {
+  return count > 1 ? 'comments' : 'comment';
 };
 
 var _parse = function(srcComments) {
@@ -58,10 +65,6 @@ var _parse = function(srcComments) {
     c.init(comment.text, comment.author, comment.email, comment.timestamp);
     return c;
   });
-};
-
-var _commentString = function(count) {
-  return count > 1 ? 'comments' : 'comment';
 };
 
 module.exports = CommentList;

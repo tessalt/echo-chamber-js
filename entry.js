@@ -1,10 +1,12 @@
 var EchoChamber = (function (window, undefined) {
 
-  var EchoChamber = require('./src/echo_chamber.js'); 
+  var EchoChamber = window.EchoChamber || {};
+ 
+  EchoChamber.App = require('./src/echo_chamber.js'); 
 
-  var ec = Object.create(EchoChamber);
-  ec.init();
+  var app = Object.create(EchoChamber.App);
+  app.init();
   
-  return ec;
+  return app;
 
 })(window);
