@@ -21,7 +21,9 @@ var App = {
     this.iframe.style.width = '100%';
     this.iframe.style.overflow = 'hidden';
     this.iframe.style.border = "none";
+    this.iframe.style.opacity = 0;
     this.iframe.scrolling = false;
+    this.iframe.style.transition = "opacity .5s";
     this.iframe.setAttribute("horizontalscrolling", "no");
     this.iframe.setAttribute("verticalscrolling", "no");
     this.entry.parentNode.insertBefore(this.iframe, this.entry);
@@ -42,13 +44,14 @@ var App = {
     img.onerror = function() {
       body.removeChild(img);
       _applyPageStyles(this.iframeDoc, this.pageStyles);
+      this.iframe.style.opacity = 1;
       this.addEventListeners();
     }.bind(this);
   },
 
   addEventListeners: function () {
     var self = this;
-    this.iframe.contentWindow.addEventListener('resize', _debounce(self.form.resize.bind(self.form));
+    this.iframe.contentWindow.addEventListener('resize', _debounce(self.form.resize.bind(self.form)));
   }
 
 };
