@@ -266,8 +266,8 @@
 	    console.log('form init');
 	    this.iframe = iframe; 
 	    this.DOM = {};
-	    this.fields = {};
 	    this.initDOM(this.iframe);
+	    this.fields = this.DOM.form.getElementsByTagName("form")[0].elements;
 	    this.commentsList = Object.create(CommentList);
 	    this.commentsList.init(this.DOM.form, this.renderCallback);
 	    this.addEventListeners();
@@ -276,6 +276,7 @@
 
 	  addEventListeners: function () {
 	    this.DOM.form.addEventListener('submit', this.onClick.bind(this));
+	    this.fields["text"].addEventListener('focus', this.onTextareaFocus.bind(this));
 	  },
 
 	  resize: function () {
@@ -296,7 +297,6 @@
 
 	  submit: function () {
 	    var comment = Object.create(Comment);
-	    this.fields = this.DOM.form.getElementsByTagName("form")[0].elements;
 	    comment.init(this.fields["text"].value, this.fields["author"].value, this.fields["email"].value.trim(), new Date().toString());
 	    if (comment.validate()) {
 	      this.commentsList.comments.push(comment);
@@ -318,14 +318,16 @@
 	    }.bind(this));
 	  },
 
+	  onTextareaFocus: function (e) {
+	    var fields = this.DOM.form.querySelectorAll('.ec-form__fields');
+	    fields[0].style.display = "block";
+	    this.resize();
+	  },
+
 	  clear: function () {
 	    ["text", "author", "email"].forEach(function(field) {
 	      this.fields[field].value = '';
 	    }.bind(this));
-	  },
-
-	  renderCallback: function (count) {
-	    console.log(this);
 	  },
 
 	  onClick: function (e) {
