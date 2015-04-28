@@ -2,10 +2,13 @@ var Comment = require('./comment.js');
 
 var CommentList = {
   
-  init: function (form) {
+  init: function (form, renderCallback) {
     var list = document.createElement("div");
     list.setAttribute("id", "EC-list");
+    list.setAttribute("class", "ec-list");
+    this.form = form;
     this.list = form.parentNode.appendChild(list);
+    this.renderCallback = renderCallback;
     this.path = window.location.href; 
     this.comments = this.load();
     this.render();
@@ -27,8 +30,8 @@ var CommentList = {
 
   render: function (target) {
     var count = this.comments.length;
-    this.listHeader = "<h3 class='mt0 mb0'>" + count + " " + _commentString(count)  + "</h3>";
-    this.list.innerHTML = this.listHeader + this.buildHTML();
+    this.list.innerHTML = this.buildHTML();
+    this.form.firstChild.innerHTML = count + " " + _commentString(count);
   }, 
 
   stringify: function () {
@@ -48,7 +51,7 @@ var CommentList = {
 
   buildHTML: function () {
     var comments = this.comments.slice();
-    return comments.reverse().reduce(function(total, comment) {
+    return comments.reduce(function(total, comment) {
       return total + comment.render(); 
     }, '');
   }
@@ -56,7 +59,7 @@ var CommentList = {
 }
 
 var _commentString = function(count) {
-  return count > 1 ? 'comments' : 'comment';
+  return count === 1 ? 'comment' : 'comments';
 };
 
 var _parse = function(srcComments) {

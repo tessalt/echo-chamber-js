@@ -182,10 +182,13 @@
 
 	var CommentList = {
 	  
-	  init: function (form) {
+	  init: function (form, renderCallback) {
 	    var list = document.createElement("div");
 	    list.setAttribute("id", "EC-list");
+	    list.setAttribute("class", "ec-list");
+	    this.form = form;
 	    this.list = form.parentNode.appendChild(list);
+	    this.renderCallback = renderCallback;
 	    this.path = window.location.href; 
 	    this.comments = this.load();
 	    this.render();
@@ -207,8 +210,8 @@
 
 	  render: function (target) {
 	    var count = this.comments.length;
-	    this.listHeader = "<h3 class='mt0 mb0'>" + count + " " + _commentString(count)  + "</h3>";
-	    this.list.innerHTML = this.listHeader + this.buildHTML();
+	    this.list.innerHTML = this.buildHTML();
+	    this.form.firstChild.innerHTML = count + " " + _commentString(count);
 	  }, 
 
 	  stringify: function () {
@@ -228,7 +231,7 @@
 
 	  buildHTML: function () {
 	    var comments = this.comments.slice();
-	    return comments.reverse().reduce(function(total, comment) {
+	    return comments.reduce(function(total, comment) {
 	      return total + comment.render(); 
 	    }, '');
 	  }
@@ -236,7 +239,7 @@
 	}
 
 	var _commentString = function(count) {
-	  return count > 1 ? 'comments' : 'comment';
+	  return count === 1 ? 'comment' : 'comments';
 	};
 
 	var _parse = function(srcComments) {
@@ -266,7 +269,7 @@
 	    this.fields = {};
 	    this.initDOM(this.iframe);
 	    this.commentsList = Object.create(CommentList);
-	    this.commentsList.init(this.DOM.form);
+	    this.commentsList.init(this.DOM.form, this.renderCallback);
 	    this.addEventListeners();
 	    this.resize();
 	  },
@@ -324,6 +327,10 @@
 	    }.bind(this));
 	  },
 
+	  renderCallback: function (count) {
+	    console.log(this);
+	  },
+
 	  onClick: function (e) {
 	    e.preventDefault();
 	    this.submit();
@@ -333,15 +340,13 @@
 
 	var _formTemplate = 
 	  "<div id='ECForm' class='ec-form-wrapper'>" + 
-	    "<h2 class='h3 mt0'>Leave a comment</h2>" + 
-	    "<form class='p1 ec-form bg-darken-1'>" + 
-	      "<div class='ec-form-field mt1 mb2 px1' id='ECForm-text'><textarea class='field-light full-width' name='text' id='ECFormField'></textarea></div>" + 
-	      "<div class='clearfix mb1'>" + 
-	        "<div class='ec-form-field px1 col col-4' id='ECForm-author'><input class='field-light full-width' type='text' name='author' placeholder='name'></div>" +
-	        "<div class='ec-form-field px1 col col-4' id='ECForm-email'><input class='field-light full-width' type='email' name='email' placeholder='email'></div>" +
-	        "<div class='px1 col col-4'>" + 
-	          "<input class='button full-width' id='ECFormSubmit' type='submit' value='Submit comment'>" + 
-	        "</div>" +
+	    "<h2 class='ec-heading--2' id='ECFormHeading'></h2>" + 
+	    "<form class=ec-form'>" + 
+	      "<div class='ec-form__field' id='ECForm-text'><textarea class='' name='text' id='ECFormField'></textarea></div>" + 
+	      "<div class='ec-form__fields'>" + 
+	        "<div class='ec-form__field' id='ECForm-author'><input class='' type='text' name='author' placeholder='name'></div>" +
+	        "<div class='ec-form__field' id='ECForm-email'><input class='' type='email' name='email' placeholder='email'></div>" +
+	        "<input class='button' id='ECFormSubmit' type='submit' value='Submit comment'>" + 
 	      "</div>" +
 	    "</form>" + 
 	  "</div>";
@@ -392,9 +397,9 @@
 	        "</div>" +
 	        "<div class='overflow-hidden'>" +
 	          "<h3 class='h5 mt0 regular'><span class='bold'>" + this.author  + "</span>" +
+	           _renderDate(this.timestamp) +
 	          "</h3>" +
 	          "<p class='mb1'>" + this.text + "</p>" +
-	          "<p class='mb0 h5'><small class='gray'>" + _renderDate(this.timestamp) + "</small></p>" +
 	        "</div>" +
 	      "</div>"
 	    );

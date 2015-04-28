@@ -30,9 +30,9 @@ var Comment = {
         "</div>" +
         "<div class='overflow-hidden'>" +
           "<h3 class='h5 mt0 regular'><span class='bold'>" + this.author  + "</span>" +
+           _renderDate(this.timestamp) +
           "</h3>" +
           "<p class='mb1'>" + this.text + "</p>" +
-          "<p class='mb0 h5'><small class='gray'>" + _renderDate(this.timestamp) + "</small></p>" +
         "</div>" +
       "</div>"
     );

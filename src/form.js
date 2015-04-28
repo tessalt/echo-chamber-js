@@ -10,7 +10,7 @@ var Form = {
     this.fields = {};
     this.initDOM(this.iframe);
     this.commentsList = Object.create(CommentList);
-    this.commentsList.init(this.DOM.form);
+    this.commentsList.init(this.DOM.form, this.renderCallback);
     this.addEventListeners();
     this.resize();
   },
@@ -68,6 +68,10 @@ var Form = {
     }.bind(this));
   },
 
+  renderCallback: function (count) {
+    console.log(this);
+  },
+
   onClick: function (e) {
     e.preventDefault();
     this.submit();
@@ -77,15 +81,13 @@ var Form = {
 
 var _formTemplate = 
   "<div id='ECForm' class='ec-form-wrapper'>" + 
-    "<h2 class='h3 mt0'>Leave a comment</h2>" + 
-    "<form class='p1 ec-form bg-darken-1'>" + 
-      "<div class='ec-form-field mt1 mb2 px1' id='ECForm-text'><textarea class='field-light full-width' name='text' id='ECFormField'></textarea></div>" + 
-      "<div class='clearfix mb1'>" + 
-        "<div class='ec-form-field px1 col col-4' id='ECForm-author'><input class='field-light full-width' type='text' name='author' placeholder='name'></div>" +
-        "<div class='ec-form-field px1 col col-4' id='ECForm-email'><input class='field-light full-width' type='email' name='email' placeholder='email'></div>" +
-        "<div class='px1 col col-4'>" + 
-          "<input class='button full-width' id='ECFormSubmit' type='submit' value='Submit comment'>" + 
-        "</div>" +
+    "<h2 class='ec-heading--2' id='ECFormHeading'></h2>" + 
+    "<form class=ec-form'>" + 
+      "<div class='ec-form__field' id='ECForm-text'><textarea class='' name='text' id='ECFormField'></textarea></div>" + 
+      "<div class='ec-form__fields'>" + 
+        "<div class='ec-form__field' id='ECForm-author'><input class='' type='text' name='author' placeholder='name'></div>" +
+        "<div class='ec-form__field' id='ECForm-email'><input class='' type='email' name='email' placeholder='email'></div>" +
+        "<input class='button' id='ECFormSubmit' type='submit' value='Submit comment'>" + 
       "</div>" +
     "</form>" + 
   "</div>";
