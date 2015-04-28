@@ -54,11 +54,8 @@ var Form = {
     errors.forEach(function(error) {
       var msg = this.doc.createElement("p");
       msg.innerHTML = error.message;
-      msg.classList.add("red");
-      msg.classList.add("mt1");
-      msg.classList.add("h5");
-      msg.classList.add("mb1");
-      this.fields[error.field].parentNode.appendChild(msg)
+      msg.classList.add("ec-error");
+      this.fields[error.field].parentNode.appendChild(msg);
     }.bind(this));
   },
 

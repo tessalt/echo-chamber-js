@@ -37,6 +37,12 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
 }
 
+.ec-form__field input:focus,
+.ec-form__field textarea:focus {
+  border: 1px solid #bdbdbd;
+  outline: none;
+}
+
 .ec-form__fields {
   overflow: hidden;
   width: 50%;
@@ -54,6 +60,11 @@ h1, h2, h3, h4, h5, h6 {
   border: 0;
   color: white;
   padding: 8px 12px;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
 }
 
 .ec-list {
@@ -81,7 +92,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .ec-comment__body h4 {
-  margin-bottom: 10px;
+  margin-bottom: 3px;
+  line-height: 1.3;
   font-size: 14px;
 }
 
@@ -95,6 +107,13 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   font-size: 14px;
   line-height: 1.3;
+}
+
+.ec-error {
+  margin: 0;
+  color: #f20000;
+  font-size: 14px;
+  padding-bottom: 20px;
 }
 
 @media screen and (max-width: 480px) {
