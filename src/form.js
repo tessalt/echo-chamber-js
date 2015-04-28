@@ -82,12 +82,12 @@ var Form = {
 var _formTemplate = 
   "<div id='ECForm' class='ec-form-wrapper'>" + 
     "<h2 class='ec-heading--2' id='ECFormHeading'></h2>" + 
-    "<form class=ec-form'>" + 
-      "<div class='ec-form__field' id='ECForm-text'><textarea class='' name='text' id='ECFormField'></textarea></div>" + 
+    "<form class='ec-form'>" + 
+      "<div class='ec-form__field' id='ECForm-text'><textarea class='' name='text' id='ECFormField' placeholder='Your comment...'></textarea></div>" + 
       "<div class='ec-form__fields'>" + 
-        "<div class='ec-form__field' id='ECForm-author'><input class='' type='text' name='author' placeholder='name'></div>" +
-        "<div class='ec-form__field' id='ECForm-email'><input class='' type='email' name='email' placeholder='email'></div>" +
-        "<input class='button' id='ECFormSubmit' type='submit' value='Submit comment'>" + 
+        "<div class='ec-form__field' id='ECForm-author'><input class='' type='text' name='author' placeholder='Name'></div>" +
+        "<div class='ec-form__field' id='ECForm-email'><input class='' type='email' name='email' placeholder='Email'></div>" +
+        "<div class=''><input class='button' id='ECFormSubmit' type='submit' value='Submit comment'></div>" + 
       "</div>" +
     "</form>" + 
   "</div>";

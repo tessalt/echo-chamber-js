@@ -24,15 +24,15 @@ var Comment = {
 
   render: function() {
     return (
-      "<div class='ec-comment border-bottom py2 clearfix'>" + 
-        "<div class='left mr2'>" +
-          "<img class='rounded' src='" + _authorGravatar(this.email) + "'>" +
+      "<div class='ec-comment'>" + 
+        "<div class='ec-comment__avatar'>" +
+          "<img src='" + _authorGravatar(this.email) + "'>" +
         "</div>" +
-        "<div class='overflow-hidden'>" +
-          "<h3 class='h5 mt0 regular'><span class='bold'>" + this.author  + "</span>" +
-           _renderDate(this.timestamp) +
-          "</h3>" +
-          "<p class='mb1'>" + this.text + "</p>" +
+        "<div class='ec-comment__body'>" +
+          "<h4 class=''>" + this.author  +
+            "<small> on " + _renderDate(this.timestamp) + "</small>" +
+          "</h4>" +
+          "<p class=''>" + this.text + "</p>" +
         "</div>" +
       "</div>"
     );
@@ -40,7 +40,7 @@ var Comment = {
 };
 
 var _authorGravatar = function(email) {
-  return "http://www.gravatar.com/avatar/" + _emailHash(email) + "?s=38";
+  return "http://www.gravatar.com/avatar/" + _emailHash(email) + "?s=48";
 };
 
 var _emailHash = function(email) {

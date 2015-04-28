@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/tessalt/echo-chamber-js",
   "dependencies": {
-    "basscss": "^6.0.2",
     "css-loader": "^0.10.1",
     "extract-text-webpack-plugin": "^0.5.0",
     "js-md5": "^0.3.0",

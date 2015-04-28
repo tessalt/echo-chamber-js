@@ -341,12 +341,12 @@
 	var _formTemplate = 
 	  "<div id='ECForm' class='ec-form-wrapper'>" + 
 	    "<h2 class='ec-heading--2' id='ECFormHeading'></h2>" + 
-	    "<form class=ec-form'>" + 
-	      "<div class='ec-form__field' id='ECForm-text'><textarea class='' name='text' id='ECFormField'></textarea></div>" + 
+	    "<form class='ec-form'>" + 
+	      "<div class='ec-form__field' id='ECForm-text'><textarea class='' name='text' id='ECFormField' placeholder='Your comment...'></textarea></div>" + 
 	      "<div class='ec-form__fields'>" + 
-	        "<div class='ec-form__field' id='ECForm-author'><input class='' type='text' name='author' placeholder='name'></div>" +
-	        "<div class='ec-form__field' id='ECForm-email'><input class='' type='email' name='email' placeholder='email'></div>" +
-	        "<input class='button' id='ECFormSubmit' type='submit' value='Submit comment'>" + 
+	        "<div class='ec-form__field' id='ECForm-author'><input class='' type='text' name='author' placeholder='Name'></div>" +
+	        "<div class='ec-form__field' id='ECForm-email'><input class='' type='email' name='email' placeholder='Email'></div>" +
+	        "<div class=''><input class='button' id='ECFormSubmit' type='submit' value='Submit comment'></div>" + 
 	      "</div>" +
 	    "</form>" + 
 	  "</div>";
@@ -391,15 +391,15 @@
 
 	  render: function() {
 	    return (
-	      "<div class='ec-comment border-bottom py2 clearfix'>" + 
-	        "<div class='left mr2'>" +
-	          "<img class='rounded' src='" + _authorGravatar(this.email) + "'>" +
+	      "<div class='ec-comment'>" + 
+	        "<div class='ec-comment__avatar'>" +
+	          "<img src='" + _authorGravatar(this.email) + "'>" +
 	        "</div>" +
-	        "<div class='overflow-hidden'>" +
-	          "<h3 class='h5 mt0 regular'><span class='bold'>" + this.author  + "</span>" +
-	           _renderDate(this.timestamp) +
-	          "</h3>" +
-	          "<p class='mb1'>" + this.text + "</p>" +
+	        "<div class='ec-comment__body'>" +
+	          "<h4 class=''>" + this.author  +
+	            "<small> on " + _renderDate(this.timestamp) + "</small>" +
+	          "</h4>" +
+	          "<p class=''>" + this.text + "</p>" +
 	        "</div>" +
 	      "</div>"
 	    );
@@ -407,7 +407,7 @@
 	};
 
 	var _authorGravatar = function(email) {
-	  return "http://www.gravatar.com/avatar/" + _emailHash(email) + "?s=38";
+	  return "http://www.gravatar.com/avatar/" + _emailHash(email) + "?s=48";
 	};
 
 	var _emailHash = function(email) {
