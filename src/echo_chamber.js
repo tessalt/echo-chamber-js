@@ -1,11 +1,10 @@
-require('./style.css');
 var CommentList = require('./comment_list.js');
 var Form = require('./form.js');
 
 var App = {
   
   init: function () {
-    this.entry = document.getElementsByTagName('script')[0];
+    this.entry = document.getElementById('echochamber');
    
     this.attachIframe(); 
     this.iframeDoc = this.iframe.contentWindow.document;
@@ -34,7 +33,7 @@ var App = {
         img    = document.createElement( "img" ),
         body   = document.body,
         head   = this.iframeDoc.getElementsByTagName('head')[0],
-        cssURL = 'http://widget.dev/main.css';
+        cssURL = EchoChamber.host + '/main.css'; 
     link.rel = 'stylesheet';
     link.type = 'text/css';
     link.href = cssURL; 
@@ -65,6 +64,7 @@ var _applyPageStyles = function(doc, styles) {
     body.style[property] = styles[property];
   }
   var buttons = doc.querySelectorAll(".button");
+  var paragraphs = doc.getElementsByTagName('p');
   var bgColor;
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].style['background-color'] = styles.anchorColor;
@@ -75,7 +75,7 @@ var _getStyle = function(node, property) {
   var value;
   value = window.getComputedStyle(node, null).getPropertyValue(property);
   if (value === '' || value === 'transparent' || value === 'rgba(0,0,0,0)') {
-    return getStyle(node.parentNode, property);
+    return _getStyle(node.parentNode, property);
   } else {
     return value || '';
   }
@@ -83,12 +83,16 @@ var _getStyle = function(node, property) {
 
 var _getBasicStyles = function(container) {
   var anchor = document.createElement('a');
+  var paragraph = document.createElement('p');
   container.appendChild(anchor);
+  container.appendChild(paragraph);
   var styles = {
     anchorColor: _getStyle(anchor, 'color'),
+    paragraphColor: _getStyle(paragraph, 'color'),
     fontFamily: _getStyle(container, 'font-family').replace(/['"]/g, '')
   }
   anchor.parentNode.removeChild(anchor);
+  paragraph.parentNode.removeChild(paragraph);
   return styles;
 };
 

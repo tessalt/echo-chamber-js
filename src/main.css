@@ -13,6 +13,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .ec-form-wrapper {
+  background: white;
   overflow: hidden;
   border-top: 1px solid #e5e5e5;
   padding-top: 20px;
@@ -25,6 +26,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .ec-list {
   overflow: hidden;
+  background: white;
 }
 
 .ec-form__field input,
@@ -33,8 +35,11 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   padding: 8px 12px;
   font-size: inherit;
-  margin-bottom: 20px;
   font-size: 14px;
+}
+
+.ec-form__field input {
+  margin-top: 20px;
 }
 
 .ec-form__field input:focus,
@@ -62,6 +67,7 @@ h1, h2, h3, h4, h5, h6 {
   color: white;
   padding: 8px 12px;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 .button:focus {
@@ -77,6 +83,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #e5e5e5;
+}
+
+.ec-comment:last-child {
+  margin-bottom: 0;
 }
 
 .ec-comment p:last-child {
@@ -114,7 +124,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   color: #f20000;
   font-size: 14px;
-  padding-bottom: 20px;
+  padding: 10px 0;
 }
 
 @media screen and (max-width: 480px) {

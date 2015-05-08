@@ -3,9 +3,9 @@ var Comment = require('./comment.js');
 var CommentList = {
   
   init: function (form, renderCallback) {
-    var list = document.createElement("div");
-    list.setAttribute("id", "EC-list");
-    list.setAttribute("class", "ec-list");
+    var list = document.createElement('div');
+    list.setAttribute('id', 'EC-list');
+    list.setAttribute('class', 'ec-list');
     this.form = form;
     this.list = form.parentNode.appendChild(list);
     this.renderCallback = renderCallback;
@@ -15,12 +15,12 @@ var CommentList = {
   },
 
   load: function () {
-    var rawComments = localStorage.getItem(this.path) || "[]";
+    var rawComments = localStorage.getItem(this.path) || '[]';
     return _parse(JSON.parse(rawComments));
   },
 
   fetch: function () {
-    var rawComments = localStorage.getItem(this.path) || "[]";
+    var rawComments = localStorage.getItem(this.path) || '[]';
     return JSON.parse(rawComments);
   },
 
@@ -31,7 +31,7 @@ var CommentList = {
   render: function (target) {
     var count = this.comments.length;
     this.list.innerHTML = this.buildHTML();
-    this.form.firstChild.innerHTML = count + " " + _commentString(count);
+    this.form.firstChild.innerHTML = count + ' ' + _commentString(count);
   }, 
 
   stringify: function () {

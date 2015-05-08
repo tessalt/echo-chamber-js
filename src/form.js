@@ -4,11 +4,10 @@ var Comment = require('./comment.js');
 var Form = {
 
   init: function (iframe) {
-    console.log('form init');
     this.iframe = iframe; 
     this.DOM = {};
     this.initDOM(this.iframe);
-    this.fields = this.DOM.form.getElementsByTagName("form")[0].elements;
+    this.fields = this.DOM.form.getElementsByTagName('form')[0].elements;
     this.commentsList = Object.create(CommentList);
     this.commentsList.init(this.DOM.form, this.renderCallback);
     this.addEventListeners();
@@ -17,18 +16,17 @@ var Form = {
 
   addEventListeners: function () {
     this.DOM.form.addEventListener('submit', this.onClick.bind(this));
-    this.fields["text"].addEventListener('focus', this.onTextareaFocus.bind(this));
+    this.fields['text'].addEventListener('focus', this.onTextareaFocus.bind(this));
   },
 
   resize: function () {
     var formHeight = this.DOM.form.clientHeight;
     var margin = parseInt(window.getComputedStyle(this.DOM.form).marginBottom);
     var num = formHeight + margin + this.commentsList.getHeight() + 20;
-    this.iframe.style.height = num + "px"; 
+    this.iframe.style.height = num + 'px'; 
   },
 
   initDOM: function () {
-    console.log('initdom called');
     this.doc = this.iframe.contentWindow.document;
     this.doc.write(_formTemplate);
     this.doc.close();
@@ -38,7 +36,10 @@ var Form = {
 
   submit: function () {
     var comment = Object.create(Comment);
-    comment.init(this.fields["text"].value, this.fields["author"].value, this.fields["email"].value.trim(), new Date().toString());
+    comment.init(this.fields['text'].value, 
+                 this.fields['author'].value, 
+                 this.fields['email'].value.trim(), 
+                 new Date().toString());
     if (comment.validate()) {
       this.commentsList.comments.push(comment);
       this.commentsList.save();
@@ -52,21 +53,21 @@ var Form = {
 
   showErrors: function (errors) {
     errors.forEach(function(error) {
-      var msg = this.doc.createElement("p");
+      var msg = this.doc.createElement('p');
       msg.innerHTML = error.message;
-      msg.classList.add("ec-error");
+      msg.classList.add('ec-error');
       this.fields[error.field].parentNode.appendChild(msg);
     }.bind(this));
   },
 
   onTextareaFocus: function (e) {
     var fields = this.DOM.form.querySelectorAll('.ec-form__fields');
-    fields[0].style.display = "block";
+    fields[0].style.display = 'block';
     this.resize();
   },
 
   clear: function () {
-    ["text", "author", "email"].forEach(function(field) {
+    ['text', 'author', 'email'].forEach(function(field) {
       this.fields[field].value = '';
     }.bind(this));
   },

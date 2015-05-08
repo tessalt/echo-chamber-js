@@ -1,4 +1,4 @@
-md5 = require('../node_modules/js-md5');
+md5 = require('./md5');
 
 var Comment = {
   
@@ -15,7 +15,7 @@ var Comment = {
       if (!this[property]) {
         this.errors.push({
           field: property,
-          message: "Please enter " + property
+          message: 'Please enter ' + property
         });
       }
     }.bind(this));
@@ -40,7 +40,7 @@ var Comment = {
 };
 
 var _authorGravatar = function(email) {
-  return "http://www.gravatar.com/avatar/" + _emailHash(email) + "?s=48";
+  return 'http://www.gravatar.com/avatar/' + _emailHash(email) + '?s=48';
 };
 
 var _emailHash = function(email) {
@@ -49,7 +49,7 @@ var _emailHash = function(email) {
 
 var _renderDate = function(timestamp) {
   var date = new Date(timestamp);
-  return date.toDateString() + " at " + date.getHours() + ":" + date.getMinutes(); 
+  return date.toDateString() + ' at ' + date.getHours() + ':' + date.getMinutes(); 
 };
 
 module.exports = Comment;
