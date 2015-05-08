@@ -1,25 +1,65 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-md5 = require('./md5');
+var Author = {
 
-var Comment = {
-  
-  init: function(text, author, email, timestamp) {
-    this.text = text;
-    this.author = author;
+  init: function(name, email) {
+    this.name = name;
     this.email = email;
-    this.timestamp = timestamp;
-    this.errors = [];
   },
   
-  validate: function(text, author, email, timestamp) {
-    ['text', 'author', 'email'].forEach(function(property) {
+  gravatar: function() {
+    return 'http://www.gravatar.com/avatar/' + _emailHash(this.email) + '?s=48';
+  },
+
+  save: function() {
+    localStorage.setItem('author', JSON.stringify(this));
+  },
+
+  fetch: function() {
+    var raw = localStorage.getItem('author') ? JSON.parse(localStorage.getItem('author')) : {name: "", email: ""};
+    this.init(raw.name, raw.email);
+  },
+
+  validate: function() {
+    var errors = [];
+    ['name', 'email'].forEach(function(property) {
       if (!this[property]) {
-        this.errors.push({
+        errors.push({
           field: property,
           message: 'Please enter ' + property
         });
       }
     }.bind(this));
+    return errors;
+  }
+}
+
+var _emailHash = function(email) {
+  return md5(email);
+};
+
+
+module.exports = Author;
+
+},{}],2:[function(require,module,exports){
+md5 = require('./md5');
+
+var Comment = {
+  
+  init: function(author, text, timestamp) {
+    this.text = text;
+    this.author = author;
+    this.timestamp = timestamp;
+    this.errors = [];
+  },
+  
+  validate: function() {
+    this.errors = this.author.validate();
+    if (!this.text) {
+      this.errors.push({
+        field: 'text', 
+        message: 'Please enter text' 
+      });
+    }
     return this.errors.length ? false : true;
   },
 
@@ -27,10 +67,10 @@ var Comment = {
     return (
       "<div class='ec-comment'>" + 
         "<div class='ec-comment__avatar'>" +
-          "<img src='" + _authorGravatar(this.email) + "'>" +
+          "<img src='" + this.author.gravatar() + "'>" +
         "</div>" +
         "<div class='ec-comment__body'>" +
-          "<h4 class=''>" + this.author  +
+          "<h4 class=''>" + this.author.name  +
             "<small> on " + _renderDate(this.timestamp) + "</small>" +
           "</h4>" +
           "<p class=''>" + this.text + "</p>" +
@@ -40,14 +80,6 @@ var Comment = {
   }
 };
 
-var _authorGravatar = function(email) {
-  return 'http://www.gravatar.com/avatar/' + _emailHash(email) + '?s=48';
-};
-
-var _emailHash = function(email) {
-  return md5(email);
-};
-
 var _renderDate = function(timestamp) {
   var date = new Date(timestamp);
   return date.toDateString() + ' at ' + date.getHours() + ':' + date.getMinutes(); 
@@ -55,8 +87,9 @@ var _renderDate = function(timestamp) {
 
 module.exports = Comment;
 
-},{"./md5":5}],2:[function(require,module,exports){
+},{"./md5":6}],3:[function(require,module,exports){
 var Comment = require('./comment.js');
+var Author = require('./author.js');
 
 var CommentList = {
   
@@ -96,8 +129,8 @@ var CommentList = {
     return JSON.stringify(this.comments.map(function(item) {
       return {
         text: item.text,
-        author: item.author,
-        email: item.email,
+        name: item.author.name,
+        email: item.author.email,
         timestamp: item.timestamp
       }
     }));
@@ -123,14 +156,16 @@ var _commentString = function(count) {
 var _parse = function(srcComments) {
   return srcComments.map(function(comment) {
     var c = Object.create(Comment);
-    c.init(comment.text, comment.author, comment.email, comment.timestamp);
+    var a = Object.create(Author);
+    a.init(comment.name, comment.email);
+    c.init(a, comment.text, comment.timestamp);
     return c;
   });
 };
 
 module.exports = CommentList;
 
-},{"./comment.js":1}],3:[function(require,module,exports){
+},{"./author.js":1,"./comment.js":2}],4:[function(require,module,exports){
 var CommentList = require('./comment_list.js');
 var Form = require('./form.js');
 
@@ -246,9 +281,10 @@ function _debounce(func, wait, immediate) {
 
 module.exports = App;
 
-},{"./comment_list.js":2,"./form.js":4}],4:[function(require,module,exports){
+},{"./comment_list.js":3,"./form.js":5}],5:[function(require,module,exports){
 var CommentList = require('./comment_list.js');
 var Comment = require('./comment.js');
+var Author = require('./author.js');
 
 var Form = {
 
@@ -259,6 +295,8 @@ var Form = {
     this.fields = this.DOM.form.getElementsByTagName('form')[0].elements;
     this.commentsList = Object.create(CommentList);
     this.commentsList.init(this.DOM.form, this.renderCallback);
+    this.author = Object.create(Author);
+    this.author.fetch();
     this.addEventListeners();
     this.resize();
   },
@@ -285,14 +323,13 @@ var Form = {
 
   submit: function () {
     var comment = Object.create(Comment);
-    comment.init(this.fields['text'].value, 
-                 this.fields['author'].value, 
-                 this.fields['email'].value.trim(), 
-                 new Date().toString());
+    this.author.init(this.fields['name'].value, this.fields['email'].value.trim());
+    comment.init(this.author, this.fields['text'].value, new Date().toString());
     if (comment.validate()) {
       this.commentsList.comments.push(comment);
       this.commentsList.save();
       this.commentsList.render(this.DOM.form);
+      this.author.save();
       this.clear();
     } else {
       this.showErrors(comment.errors);
@@ -312,11 +349,14 @@ var Form = {
   onTextareaFocus: function (e) {
     var fields = this.DOM.form.querySelectorAll('.ec-form__fields');
     fields[0].style.display = 'block';
+    ['name', 'email'].forEach(function(property) {
+      this.fields[property].value = this.author[property] || '';
+    }.bind(this));
     this.resize();
   },
 
   clear: function () {
-    ['text', 'author', 'email'].forEach(function(field) {
+    ['text', 'name', 'email'].forEach(function(field) {
       this.fields[field].value = '';
     }.bind(this));
   },
@@ -332,18 +372,27 @@ var _formTemplate =
   "<div id='ECForm' class='ec-form-wrapper'>" + 
     "<h2 class='ec-heading--2' id='ECFormHeading'></h2>" + 
     "<form class='ec-form'>" + 
-      "<div class='ec-form__field' id='ECForm-text'><textarea class='' name='text' id='ECFormField' placeholder='Your comment...'></textarea></div>" + 
+      "<div class='ec-form__field' id='ECForm-text'>" +
+        "<textarea class='' name='text' id='ECFormField' placeholder='Your comment...'>" +
+        "</textarea>" + 
+      "</div>" + 
       "<div class='ec-form__fields'>" + 
-        "<div class='ec-form__field' id='ECForm-author'><input class='' type='text' name='author' placeholder='Name'></div>" +
-        "<div class='ec-form__field' id='ECForm-email'><input class='' type='email' name='email' placeholder='Email'></div>" +
-        "<div class=''><input class='button' id='ECFormSubmit' type='submit' value='Submit comment'></div>" + 
+        "<div class='ec-form__field' id='ECForm-author'>" + 
+          "<input class='' type='text' name='name' placeholder='Name'>" +
+        "</div>" +
+        "<div class='ec-form__field' id='ECForm-email'>" + 
+          "<input class='' type='email' name='email' placeholder='Email'>" +
+        "</div>" +
+        "<div class=''>" + 
+          "<input class='button' id='ECFormSubmit' type='submit' value='Submit comment'>" + 
+        "</div>" + 
       "</div>" +
     "</form>" + 
   "</div>";
 
 module.exports = Form;
 
-},{"./comment.js":1,"./comment_list.js":2}],5:[function(require,module,exports){
+},{"./author.js":1,"./comment.js":2,"./comment_list.js":3}],6:[function(require,module,exports){
 var md5 = function (string) {
 
    function RotateLeft(lValue, iShiftBits) {
@@ -547,7 +596,7 @@ var md5 = function (string) {
 
 module.exports = md5;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var EchoChamber = (function (window, undefined) {
 
   var EchoChamber = window.EchoChamber || {};
@@ -567,4 +616,4 @@ var EchoChamber = (function (window, undefined) {
 
 })(window);
 
-},{"./src/echo_chamber.js":3}]},{},[6]);
+},{"./src/echo_chamber.js":4}]},{},[7]);

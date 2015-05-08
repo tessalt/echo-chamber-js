@@ -1,4 +1,5 @@
 var Comment = require('./comment.js');
+var Author = require('./author.js');
 
 var CommentList = {
   
@@ -38,8 +39,8 @@ var CommentList = {
     return JSON.stringify(this.comments.map(function(item) {
       return {
         text: item.text,
-        author: item.author,
-        email: item.email,
+        name: item.author.name,
+        email: item.author.email,
         timestamp: item.timestamp
       }
     }));
@@ -65,7 +66,9 @@ var _commentString = function(count) {
 var _parse = function(srcComments) {
   return srcComments.map(function(comment) {
     var c = Object.create(Comment);
-    c.init(comment.text, comment.author, comment.email, comment.timestamp);
+    var a = Object.create(Author);
+    a.init(comment.name, comment.email);
+    c.init(a, comment.text, comment.timestamp);
     return c;
   });
 };

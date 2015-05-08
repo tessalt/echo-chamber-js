@@ -1,5 +1,6 @@
 var CommentList = require('./comment_list.js');
 var Comment = require('./comment.js');
+var Author = require('./author.js');
 
 var Form = {
 
@@ -10,6 +11,8 @@ var Form = {
     this.fields = this.DOM.form.getElementsByTagName('form')[0].elements;
     this.commentsList = Object.create(CommentList);
     this.commentsList.init(this.DOM.form, this.renderCallback);
+    this.author = Object.create(Author);
+    this.author.fetch();
     this.addEventListeners();
     this.resize();
   },
@@ -36,14 +39,13 @@ var Form = {
 
   submit: function () {
     var comment = Object.create(Comment);
-    comment.init(this.fields['text'].value, 
-                 this.fields['author'].value, 
-                 this.fields['email'].value.trim(), 
-                 new Date().toString());
+    this.author.init(this.fields['name'].value, this.fields['email'].value.trim());
+    comment.init(this.author, this.fields['text'].value, new Date().toString());
     if (comment.validate()) {
       this.commentsList.comments.push(comment);
       this.commentsList.save();
       this.commentsList.render(this.DOM.form);
+      this.author.save();
       this.clear();
     } else {
       this.showErrors(comment.errors);
@@ -63,11 +65,14 @@ var Form = {
   onTextareaFocus: function (e) {
     var fields = this.DOM.form.querySelectorAll('.ec-form__fields');
     fields[0].style.display = 'block';
+    ['name', 'email'].forEach(function(property) {
+      this.fields[property].value = this.author[property] || '';
+    }.bind(this));
     this.resize();
   },
 
   clear: function () {
-    ['text', 'author', 'email'].forEach(function(field) {
+    ['text', 'name', 'email'].forEach(function(field) {
       this.fields[field].value = '';
     }.bind(this));
   },
@@ -83,11 +88,20 @@ var _formTemplate =
   "<div id='ECForm' class='ec-form-wrapper'>" + 
     "<h2 class='ec-heading--2' id='ECFormHeading'></h2>" + 
     "<form class='ec-form'>" + 
-      "<div class='ec-form__field' id='ECForm-text'><textarea class='' name='text' id='ECFormField' placeholder='Your comment...'></textarea></div>" + 
+      "<div class='ec-form__field' id='ECForm-text'>" +
+        "<textarea class='' name='text' id='ECFormField' placeholder='Your comment...'>" +
+        "</textarea>" + 
+      "</div>" + 
       "<div class='ec-form__fields'>" + 
-        "<div class='ec-form__field' id='ECForm-author'><input class='' type='text' name='author' placeholder='Name'></div>" +
-        "<div class='ec-form__field' id='ECForm-email'><input class='' type='email' name='email' placeholder='Email'></div>" +
-        "<div class=''><input class='button' id='ECFormSubmit' type='submit' value='Submit comment'></div>" + 
+        "<div class='ec-form__field' id='ECForm-author'>" + 
+          "<input class='' type='text' name='name' placeholder='Name'>" +
+        "</div>" +
+        "<div class='ec-form__field' id='ECForm-email'>" + 
+          "<input class='' type='email' name='email' placeholder='Email'>" +
+        "</div>" +
+        "<div class=''>" + 
+          "<input class='button' id='ECFormSubmit' type='submit' value='Submit comment'>" + 
+        "</div>" + 
       "</div>" +
     "</form>" + 
   "</div>";
