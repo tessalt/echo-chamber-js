@@ -20,11 +20,6 @@ var CommentList = {
     return _parse(JSON.parse(rawComments));
   },
 
-  fetch: function () {
-    var rawComments = localStorage.getItem(this.path) || '[]';
-    return JSON.parse(rawComments);
-  },
-
   save: function () {
     localStorage.setItem(this.path, this.stringify());
   },

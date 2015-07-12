@@ -1,4 +1,24 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var EchoChamber = (function (window, undefined) {
+
+  var EchoChamber = window.EchoChamber || {};
+
+  var hosts = {
+    local: 'http://widget.dev/src',
+    prod: 'https://s3.amazonaws.com/echochamberjs/dist'
+  }
+
+  EchoChamber.host = hosts.local;
+  EchoChamber.App = require('./src/echo_chamber.js'); 
+
+  var app = Object.create(EchoChamber.App);
+  app.init();
+  
+  return app;
+
+})(window);
+
+},{"./src/echo_chamber.js":5}],2:[function(require,module,exports){
 var Author = {
 
   init: function(name, email) {
@@ -40,7 +60,7 @@ var _emailHash = function(email) {
 
 module.exports = Author;
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 md5 = require('./md5');
 
 var Comment = {
@@ -87,7 +107,7 @@ var _renderDate = function(timestamp) {
 
 module.exports = Comment;
 
-},{"./md5":6}],3:[function(require,module,exports){
+},{"./md5":7}],4:[function(require,module,exports){
 var Comment = require('./comment.js');
 var Author = require('./author.js');
 
@@ -165,7 +185,7 @@ var _parse = function(srcComments) {
 
 module.exports = CommentList;
 
-},{"./author.js":1,"./comment.js":2}],4:[function(require,module,exports){
+},{"./author.js":2,"./comment.js":3}],5:[function(require,module,exports){
 var CommentList = require('./comment_list.js');
 var Form = require('./form.js');
 
@@ -281,7 +301,7 @@ function _debounce(func, wait, immediate) {
 
 module.exports = App;
 
-},{"./comment_list.js":3,"./form.js":5}],5:[function(require,module,exports){
+},{"./comment_list.js":4,"./form.js":6}],6:[function(require,module,exports){
 var CommentList = require('./comment_list.js');
 var Comment = require('./comment.js');
 var Author = require('./author.js');
@@ -392,7 +412,7 @@ var _formTemplate =
 
 module.exports = Form;
 
-},{"./author.js":1,"./comment.js":2,"./comment_list.js":3}],6:[function(require,module,exports){
+},{"./author.js":2,"./comment.js":3,"./comment_list.js":4}],7:[function(require,module,exports){
 var md5 = function (string) {
 
    function RotateLeft(lValue, iShiftBits) {
@@ -596,24 +616,4 @@ var md5 = function (string) {
 
 module.exports = md5;
 
-},{}],7:[function(require,module,exports){
-var EchoChamber = (function (window, undefined) {
-
-  var EchoChamber = window.EchoChamber || {};
-
-  var hosts = {
-    local: 'http://widget.dev/src',
-    prod: 'https://s3.amazonaws.com/echochamberjs/dist'
-  }
-
-  EchoChamber.host = hosts.local;
-  EchoChamber.App = require('./src/echo_chamber.js'); 
-
-  var app = Object.create(EchoChamber.App);
-  app.init();
-  
-  return app;
-
-})(window);
-
-},{"./src/echo_chamber.js":4}]},{},[7]);
+},{}]},{},[1]);
