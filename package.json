@@ -4,7 +4,9 @@
   "description": "",
   "main": "bundle.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "watchify -t reactify entry.jsx -o bundle.js -v",
+    "build": "browserify -t reactify entry.jsx | uglifyjs --compress > dist/main.js && cp src/main.css dist/main.css",
+    "deploy": "npm run build && aws s3 cp dist s3://echochamberjs/dist --recursive --acl public-read"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,11 @@
     "css-loader": "^0.10.1",
     "extract-text-webpack-plugin": "^0.5.0",
     "js-md5": "^0.3.0",
+    "react": "^0.13.3",
+    "reactify": "^1.1.1",
     "style-loader": "^0.10.2",
+    "uglifyjs": "^2.4.10",
+    "watchify": "^3.2.3",
     "webpack": "^1.8.7"
   }
 }

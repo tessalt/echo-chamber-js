@@ -4,6 +4,7 @@ var Form = require('./form.js');
 var App = {
   
   init: function () {
+    console.log('works');
     this.entry = document.getElementById('echochamber');
    
     this.attachIframe(); 

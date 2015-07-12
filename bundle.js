@@ -9,7 +9,7 @@ var EchoChamber = (function (window, undefined) {
   }
 
   EchoChamber.host = hosts.local;
-  EchoChamber.App = require('./src/echo_chamber.js'); 
+  EchoChamber.App = require('./src/echo_chamber.jsx'); 
 
   var app = Object.create(EchoChamber.App);
   app.init();
@@ -18,7 +18,7 @@ var EchoChamber = (function (window, undefined) {
 
 })(window);
 
-},{"./src/echo_chamber.js":5}],2:[function(require,module,exports){
+},{"./src/echo_chamber.jsx":5}],2:[function(require,module,exports){
 var Author = {
 
   init: function(name, email) {
@@ -130,11 +130,6 @@ var CommentList = {
     return _parse(JSON.parse(rawComments));
   },
 
-  fetch: function () {
-    var rawComments = localStorage.getItem(this.path) || '[]';
-    return JSON.parse(rawComments);
-  },
-
   save: function () {
     localStorage.setItem(this.path, this.stringify());
   },
@@ -192,6 +187,7 @@ var Form = require('./form.js');
 var App = {
   
   init: function () {
+    console.log('works');
     this.entry = document.getElementById('echochamber');
    
     this.attachIframe(); 

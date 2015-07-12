@@ -8,7 +8,7 @@ var EchoChamber = (function (window, undefined) {
   }
 
   EchoChamber.host = hosts.local;
-  EchoChamber.App = require('./src/echo_chamber.js'); 
+  EchoChamber.App = require('./src/echo_chamber.jsx'); 
 
   var app = Object.create(EchoChamber.App);
   app.init();
