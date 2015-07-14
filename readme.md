@@ -1,6 +1,6 @@
 # Echochamber.js [_super alpha_]
 
-## All off the commenting, none of the comments.
+## All of the commenting, none of the comments.
 
 Echochamber.js is a third-party script you can install to add a simple comment
 form to your blog post or website.
