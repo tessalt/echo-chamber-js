@@ -41,3 +41,7 @@ Copy and paste the following code where you want your comments to appear:
   </script>
 
 ```
+
+## Screenshot
+
+![screenshot](https://s3.amazonaws.com/f.cl.ly/items/1C2d1h3E2D07432A1W2Q/Screen%20Shot%202015-07-14%20at%206.19.28%20PM.png)
