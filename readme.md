@@ -37,7 +37,7 @@ Copy and paste the following code where you want your comments to appear:
       var script = document.createElement('script');
       script.src = 'https://s3.amazonaws.com/echochamberjs/dist/main.js';
       script.async = true;
-      var entry = document.getElementsByTagName('script')[0];
+      var entry = document.getElementById('echochamber');
       entry.parentNode.insertBefore(script, entry);
     })();
   </script>
