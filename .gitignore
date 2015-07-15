@@ -2,7 +2,7 @@
 *.swo
 *.db
 dist
-node_modules
+node_modules/
 *.DS_Store
 log/
 npm-debug.log
