@@ -15,8 +15,5 @@
   "bugs": {
     "url": "https://github.com/tessalt/echo-chamber-js/issues"
   },
-  "homepage": "https://github.com/tessalt/echo-chamber-js",
-  "dependencies": {
-    "js-md5": "^0.3.0"
-  }
+  "homepage": "https://github.com/tessalt/echo-chamber-js"
 }
