@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/tessalt/echo-chamber-js/issues"
   },
-  "homepage": "https://github.com/tessalt/echo-chamber-js"
+  "homepage": "https://github.com/tessalt/echo-chamber-js",
+  "devDependencies": {
+    "browserify": "^10.2.6",
+    "uglify": "^0.1.5",
+    "watchify": "^3.2.3"
+  }
 }

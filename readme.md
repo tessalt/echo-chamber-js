@@ -52,8 +52,31 @@ Copy and paste the following code where you want your comments to appear:
 
 Requirements: [node](https://nodejs.org/)
 
-1. Fork the repo
+1.Fork the repo
 * clone the fork
-* `npm install` to install dependencies
-* submit a PR and link it to the issue being solved
+* run `npm install`
 
+### Local dev:
+
+So you want the widget running on one server, and the host on another. I do this
+locally by messing with /etc/hosts like so: 
+```
+127.0.0.1 publisher.dev
+127.0.0.1 widget.dev
+```
+
+* modify your httpd.conf file (in /etc/apache2)
+```
+<VirtualHost *:80>
+    ServerName publisher.dev
+    DocumentRoot "/Users/username/directory-of-widget"
+</VirtualHost>
+<VirtualHost *:80>
+    ServerName widget.dev
+    DocumentRoot "/Users/username/directory-of-page"
+</VirtualHost>
+```
+* restart apache
+* run `./script/watch.sh` during dev (unix only)
+* run `./script/build.sh` before making a pull request
+* make a pull request against the main repo referencing an issue if possible
