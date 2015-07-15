@@ -1,6 +1,6 @@
 # Echochamber.js
 
-## All off the commenting, none of the comments.
+## All of the commenting, none of the comments.
 
 _alpha af_
 
