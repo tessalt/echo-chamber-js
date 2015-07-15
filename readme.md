@@ -47,3 +47,13 @@ Copy and paste the following code where you want your comments to appear:
 ## Screenshot
 
 ![screenshot](https://s3.amazonaws.com/f.cl.ly/items/1C2d1h3E2D07432A1W2Q/Screen%20Shot%202015-07-14%20at%206.19.28%20PM.png)
+
+## Contributing
+
+Requirements: [node](https://nodejs.org/)
+
+1. Fork the repo
+* clone the fork
+* `npm install` to install dependencies
+* submit a PR and link it to the issue being solved
+
