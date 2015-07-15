@@ -58,6 +58,8 @@ Requirements: [node](https://nodejs.org/)
 
 ### Local dev:
 
+If you want to work with the iframe environment, there are some steps:
+
 So you want the widget running on one server, and the host on another. I do this
 locally by messing with /etc/hosts like so: 
 ```
@@ -80,3 +82,4 @@ locally by messing with /etc/hosts like so:
 * run `./script/watch.sh` during dev (unix only)
 * run `./script/build.sh` before making a pull request
 * make a pull request against the main repo referencing an issue if possible
+
