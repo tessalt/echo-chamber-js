@@ -53,7 +53,7 @@ Copy and paste the following code where you want your comments to appear:
 Requirements: [node](https://nodejs.org/)
 
 1. Fork the repo
-*. clone the fork
-*. `npm install` to install dependencies
-#. submit a PR and link it to the issue being solved
+* clone the fork
+* `npm install` to install dependencies
+* submit a PR and link it to the issue being solved
 
