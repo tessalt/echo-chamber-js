@@ -10,7 +10,7 @@ var CommentList = {
     this.form = form;
     this.list = form.parentNode.appendChild(list);
     this.renderCallback = renderCallback;
-    this.path = window.location.href; 
+    this.path = EchoChamber.discussionURL; 
     this.comments = this.load();
     this.render();
   },
