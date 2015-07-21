@@ -6,7 +6,7 @@ var Author = {
   },
   
   gravatar: function() {
-    return 'http://www.gravatar.com/avatar/' + _emailHash(this.email) + '?s=48';
+    return 'https://www.gravatar.com/avatar/' + _emailHash(this.email) + '?s=48';
   },
 
   save: function() {
