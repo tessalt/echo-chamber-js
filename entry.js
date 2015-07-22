@@ -8,11 +8,11 @@ var EchoChamber = (function (window, undefined) {
   }
 
   EchoChamber.host = hosts.prod;
-  EchoChamber.App = require('./src/echo_chamber.js'); 
+  EchoChamber.App = require('./src/echo_chamber.js');
 
   var app = Object.create(EchoChamber.App);
   app.init();
-  
+
   return app;
 
 })(window);

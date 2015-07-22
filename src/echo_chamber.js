@@ -2,14 +2,14 @@ var CommentList = require('./comment_list.js');
 var Form = require('./form.js');
 
 var App = {
-  
+
   init: function () {
     this.entry = document.getElementById('echochamber');
-   
-    this.attachIframe(); 
+
+    this.attachIframe();
     this.iframeDoc = this.iframe.contentWindow.document;
     this.pageStyles = _getBasicStyles(this.entry.parentNode);
-  
+
     this.form = Object.create(Form);
     this.form.init(this.iframe);
     this.loadStylesheet();
@@ -26,17 +26,17 @@ var App = {
     this.iframe.setAttribute("horizontalscrolling", "no");
     this.iframe.setAttribute("verticalscrolling", "no");
     this.entry.parentNode.insertBefore(this.iframe, this.entry);
-  }, 
+  },
 
   loadStylesheet: function () {
     var link   = document.createElement('link'),
         img    = document.createElement( "img" ),
         body   = document.body,
         head   = this.iframeDoc.getElementsByTagName('head')[0],
-        cssURL = EchoChamber.host + '/main.css'; 
+        cssURL = EchoChamber.host + '/main.css';
     link.rel = 'stylesheet';
     link.type = 'text/css';
-    link.href = cssURL; 
+    link.href = cssURL;
     head.appendChild(link);
     body.appendChild(img);
     img.src = cssURL;
@@ -63,7 +63,7 @@ var _applyPageStyles = function(doc, styles) {
     }
     body.style[property] = styles[property];
   }
-  var buttons = doc.querySelectorAll(".button");
+  var buttons = doc.getElementsByTagName("button");
   var paragraphs = doc.getElementsByTagName('p');
   var bgColor;
   for (var i = 0; i < buttons.length; i++) {

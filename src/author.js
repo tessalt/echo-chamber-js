@@ -4,7 +4,7 @@ var Author = {
     this.name = name;
     this.email = email;
   },
-  
+
   gravatar: function() {
     return 'https://www.gravatar.com/avatar/' + _emailHash(this.email) + '?s=48';
   },

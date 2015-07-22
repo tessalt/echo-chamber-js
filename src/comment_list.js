@@ -2,7 +2,7 @@ var Comment = require('./comment.js');
 var Author = require('./author.js');
 
 var CommentList = {
-  
+
   init: function (form, renderCallback) {
     var list = document.createElement('div');
     list.setAttribute('id', 'EC-list');
@@ -10,7 +10,7 @@ var CommentList = {
     this.form = form;
     this.list = form.parentNode.appendChild(list);
     this.renderCallback = renderCallback;
-    this.path = EchoChamber.discussionURL; 
+    this.path = EchoChamber.discussionURL;
     this.comments = this.load();
     this.render();
   },
@@ -33,7 +33,7 @@ var CommentList = {
     var count = this.comments.length;
     this.list.innerHTML = this.buildHTML();
     this.form.firstChild.innerHTML = count + ' ' + _commentString(count);
-  }, 
+  },
 
   stringify: function () {
     return JSON.stringify(this.comments.map(function(item) {
@@ -45,7 +45,7 @@ var CommentList = {
       }
     }));
   },
-  
+
   getHeight: function () {
     return this.list.clientHeight;
   },
@@ -53,7 +53,7 @@ var CommentList = {
   buildHTML: function () {
     var comments = this.comments.slice();
     return comments.reduce(function(total, comment) {
-      return total + comment.render(); 
+      return total + comment.render();
     }, '');
   }
 
