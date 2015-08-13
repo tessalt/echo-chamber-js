@@ -5,4 +5,4 @@ if [[ ! -e dist ]]; then
 fi
 browserify entry.js > dist/main.js
 uglify -s dist/main.js -o dist/main.js
-cp src/main.css dist/main.css
+minify src/main.css > dist/main.css
